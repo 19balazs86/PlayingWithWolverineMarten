@@ -16,6 +16,15 @@ public static class Mappers
         };
     }
 
+    public static void ApplyChangesOnProduct(this UpdateProduct up, Product p)
+    {
+        p.Name         = up.Name;
+        p.Price        = up.Price;
+        p.Description  = up.Description;
+        p.CreatedDate  = DateTime.UtcNow;
+        p.CategoryEnum = up.CategoryEnum;
+    }
+
     // It can be replaced with Mapster
     public static readonly Expression<Func<Product, ProductDto>> ProductToDtoProjection = p =>
         new ProductDto

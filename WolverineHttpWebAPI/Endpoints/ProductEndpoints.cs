@@ -71,6 +71,24 @@ public static class ProductEndpoints
     //    return (TypedResults.Created($"/api/Product/{product.Id}", product), ProductCreated.FromId(product.Id));
     //}
 
+    [WolverinePut("/api/Product")]
+    public static async Task<Ok<UpdateProduct>> Update(UpdateProduct updateProduct, Product product, IDocumentSession documentSession)
+    {
+        // Note: ProductLookupMiddleware is called before this handler, and it provides the Product
+
+        updateProduct.ApplyChangesOnProduct(product);
+
+        documentSession.Update(product);
+
+        await documentSession.SaveChangesAsync();
+
+        // There is an issue with wolverine
+        // A local variable or function named 'result' is already defined in this scope
+        // In this method, can not return with IResult or Task.
+        // TODO: After the bug fixed, return with Task.
+        return TypedResults.Ok(updateProduct);
+    }
+
     [WolverineDelete("/api/Product")]
     public static async Task Delete(DeleteProduct deleteProduct, Product product, IDocumentSession documentSession)
     {
@@ -87,8 +105,6 @@ public static class ProductEndpoints
         //    .FirstOrDefaultAsync();
 
         //if (product is null) return;
-
-        if (product.IsDeleted) return;
 
         product.IsDeleted = true;
 

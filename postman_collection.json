@@ -79,7 +79,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\"\n}"
+					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": 1\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",
@@ -136,16 +136,31 @@
 			"response": []
 		},
 		{
-			"name": "DeleteProduct",
+			"name": "UpdateProduct",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
-					"mode": "formdata",
-					"formdata": []
+					"mode": "raw",
+					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": 1\n}"
 				},
 				"url": {
-					"raw": "http://localhost:5000/api/Product/1",
+					"raw": "http://localhost:5000/api/Product",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -153,8 +168,36 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"Product",
-						"1"
+						"Product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Id\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Product"
 					]
 				}
 			},

@@ -54,6 +54,7 @@ public static class Program
             app.MapWolverineEndpoints(options =>
             {
                 // Right now this Middleware cause an exception in case of IResult response
+                // A local variable or function named 'result' is already defined in this scope
                 options.UseFluentValidationProblemDetailMiddleware();
             });
 

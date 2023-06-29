@@ -79,7 +79,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": 1\n}"
+					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",
@@ -157,7 +157,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": 1\n}"
+					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category2\"\n}"
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",

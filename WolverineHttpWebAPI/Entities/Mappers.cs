@@ -21,7 +21,6 @@ public static class Mappers
         p.Name         = up.Name;
         p.Price        = up.Price;
         p.Description  = up.Description;
-        p.CreatedDate  = DateTime.UtcNow;
         p.CategoryEnum = up.CategoryEnum;
     }
 

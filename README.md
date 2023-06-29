@@ -50,4 +50,4 @@ They can be used individually as they serve their own purpose, but they can be i
 - [MartenDB](https://martendb.io) 📓*Offical documentation*
 - [Marten - Document DB on PostgreSQL](https://youtu.be/lgd_HxGBa-U) 📽️*20m - Raw Coding*
 - [Marten - Event Storage on PostgreSQL](https://youtu.be/z0DLQ6MDH5A) 📽️*22m - Raw Coding*
-- [Pragmatic Event Sourcing in with Marten](https://youtu.be/Lc2zV8KA16A) 📽️*1h20min - JetBrains - Oskar Dudycz*
+- [Practical Event Sourcing with Marten](https://youtu.be/jnDchr5eabI) 📽️*1hour - Oskar Dudycz- NDC Oslo 2023*

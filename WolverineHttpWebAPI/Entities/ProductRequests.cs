@@ -1,4 +1,6 @@
-﻿namespace WolverineHttpWebAPI.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace WolverineHttpWebAPI.Entities;
 
 /// <summary>
 /// Request for create a product.
@@ -8,6 +10,8 @@ public class CreateProduct
     public string Name { get; init; } = string.Empty;
     public int Price { get; init; }
     public string Description { get; init; } = string.Empty;
+
+    [JsonConverter(typeof(JsonStringEnumConverter))]
     public CategoryEnum CategoryEnum { get; init; }
 }
 

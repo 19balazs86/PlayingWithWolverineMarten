@@ -19,5 +19,8 @@ public sealed class CreateProductValidator : AbstractValidator<CreateProduct>
             .NotNull()
             .MinimumLength(5)
             .MaximumLength(250);
+
+        RuleFor(cp => cp.CategoryEnum)
+            .IsInEnum();
     }
 }

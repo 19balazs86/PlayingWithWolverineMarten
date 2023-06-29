@@ -12,7 +12,7 @@ public static class Mappers
             Price        = cp.Price,
             Description  = cp.Description,
             CreatedDate  = DateTime.UtcNow,
-            CategoryEnum = CategoryEnum.Category1
+            CategoryEnum = cp.CategoryEnum
         };
     }
 

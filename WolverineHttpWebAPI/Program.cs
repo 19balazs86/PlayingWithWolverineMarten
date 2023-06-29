@@ -9,7 +9,9 @@ using Wolverine.Http;
 using Wolverine.Http.FluentValidation;
 using Wolverine.Marten;
 using WolverineHttpWebAPI.Endpoints;
+using WolverineHttpWebAPI.Entities;
 using WolverineHttpWebAPI.Infrastructure;
+using WolverineHttpWebAPI.Middlewares;
 
 namespace WolverineHttpWebAPI;
 
@@ -23,7 +25,7 @@ public static class Program
 
         // Add services to the container
         {
-            hostBuilder.ApplyOaktonExtensions(); // This needs when you app.RunOaktonCommands
+            hostBuilder.ApplyOaktonExtensions(); // app.RunOaktonCommands need this
 
             hostBuilder.UseWolverine(configureWolverine);
 
@@ -70,6 +72,8 @@ public static class Program
         // Setting up the outbox on all locally handled background tasks
         options.Policies.UseDurableLocalQueues();
 
+        options.Policies.ForMessagesOfType<IProductLookup>().AddMiddleware<ProductLookupMiddleware>();
+
         // options.LocalQueueFor<ProductCreated>().UseDurableInbox();
 
         options.UseFluentValidation();
@@ -84,6 +88,8 @@ public static class Program
         options.DatabaseSchemaName = "public";
 
         options.AutoCreateSchemaObjects = AutoCreate.All; // It is 'All' by default
+
+        options.UseDefaultSerialization(enumStorage: EnumStorage.AsString);
     }
 
     private static void configureLamarServices(this ServiceRegistry services)

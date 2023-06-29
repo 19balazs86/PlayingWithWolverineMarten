@@ -71,26 +71,30 @@ public static class ProductEndpoints
     //    return (TypedResults.Created($"/api/Product/{product.Id}", product), ProductCreated.FromId(product.Id));
     //}
 
-    [WolverineDelete("/api/Product/{id}")]
-    public static async Task Delete(int id, IDocumentSession documentSession)
+    [WolverineDelete("/api/Product")]
+    public static async Task Delete(DeleteProduct deleteProduct, Product product, IDocumentSession documentSession)
     {
-        // documentSession.Delete<Product>(id);
+        // Note: ProductLookupMiddleware is called before this handler, and it provides the Product
+
+        // documentSession.Delete<Product>(deleteProduct.id);
 
         if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to make it in JSON format.
-            throw new Exception($"Random error during deleting the product({id})");
+            throw new Exception($"Random error during deleting the product({deleteProduct.Id})");
 
-        Product? product = await documentSession
-            .Query<Product>()
-            .Where(p => p.Id == id && !p.IsDeleted)
-            .FirstOrDefaultAsync();
+        //Product? product = await documentSession
+        //    .Query<Product>()
+        //    .Where(p => p.Id == deleteProduct.Id && !p.IsDeleted)
+        //    .FirstOrDefaultAsync();
 
-        if (product is null) return;
+        //if (product is null) return;
+
+        if (product.IsDeleted) return;
 
         product.IsDeleted = true;
 
         documentSession.Update(product);
 
-        // Call it manually, becase there is no [Transactional] / Policies.AutoApplyTransactions() middleware included.
+        // Call it manually, becase there is no [Transactional] / Policies.AutoApplyTransactions middleware included.
         await documentSession.SaveChangesAsync();
     }
 }

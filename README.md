@@ -15,7 +15,7 @@ They can be used individually as they serve their own purpose, but they can be i
 
 - Web API using WolverineFx.Http for managing Http endpoint routing
 - Using Marten to store a Product entity and DurableInbox for local queue messages in a transaction
-- Apply fluent validation middleware
+- Apply fluent validation middleware and a custom to load Product entity by id
 
 ###### Worker.Ping
 
@@ -30,9 +30,11 @@ They can be used individually as they serve their own purpose, but they can be i
 - Getting RequestMessage via RabbitMq and send back a ResponseMessage via RabbitMq response-queue
 
 > Personal opinion:
-> Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects.
-> They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details.
-> The documentation is very good and sufficient length to keep you occupied.
+>
+> - Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects
+> - They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details.
+> - The documentation is very good and sufficient length to keep you occupied
+> - Unit and Integration tests are like a dream using with Alba (also from 'Critter Stack' family)
 
 ##### Resources - Wolwerine and MartenDB
 

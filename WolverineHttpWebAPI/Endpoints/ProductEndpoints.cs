@@ -59,17 +59,20 @@ public static class ProductEndpoints
         return TypedResults.Created($"/api/Product/{product.Id}", product);
     }
 
-    // This is also works
-    //[Transactional]
-    //[WolverinePost("/api/Product")]
-    //public static (Created<Product>, ProductCreated) Create(CreateProduct createProduct, IDocumentSession documentSession)
-    //{
-    //    Product product = createProduct.ToProduct();
+    [Transactional]
+    [WolverinePost("/api/Product2")]
+    public static (Created<Product>, ProductCreated) Create2(CreateProduct createProduct, IDocumentSession documentSession)
+    {
+        Product product = createProduct.ToProduct();
 
-    //    documentSession.Insert(product);
+        documentSession.Insert(product);
 
-    //    return (TypedResults.Created($"/api/Product/{product.Id}", product), ProductCreated.FromId(product.Id));
-    //}
+        var response = TypedResults.Created($"/api/Product/{product.Id}", product);
+
+        // For return type, you can use IEnumerable<object> or OutgoingMessages, but the Http response will be "No Content"
+        // These 2 options are more for cascading messages, then define Http response
+        return (response, ProductCreated.FromId(product.Id));
+    }
 
     [WolverinePut("/api/Product")]
     public static async Task<Ok<UpdateProduct>> Update(UpdateProduct updateProduct, Product product, IDocumentSession documentSession)

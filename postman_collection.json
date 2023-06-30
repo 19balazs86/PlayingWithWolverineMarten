@@ -64,22 +64,15 @@
 			},
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}"
+					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",
@@ -97,28 +90,53 @@
 			"response": []
 		},
 		{
+			"name": "CreateProduct2",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/Product2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"Product2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "CreateProduct-Invalid",
 			"protocolProfileBehavior": {
 				"disabledSystemHeaders": {}
 			},
 			"request": {
 				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Name\": \"\",\n    \"Price\": 0,\n    \"Description\": \"\"\n}"
+					"raw": "{\n    \"Name\": \"\",\n    \"Price\": 0,\n    \"Description\": \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",
@@ -142,22 +160,15 @@
 			},
 			"request": {
 				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					},
-					{
-						"key": "Accept",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
+				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category2\"\n}"
+					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
 				},
 				"url": {
 					"raw": "http://localhost:5000/api/Product",

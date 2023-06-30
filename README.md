@@ -29,6 +29,12 @@ They can be used individually as they serve their own purpose, but they can be i
 - Listening for PingMessage and send a PongMessage via RabbitMq
 - Getting RequestMessage via RabbitMq and send back a ResponseMessage via RabbitMq response-queue
 
+###### WolverineHttpWebAPI.UnitTest
+
+- An example of unit testing our work and mocking 2 main components
+  - IMessageBus or IMessageContext for Wolverine with the built-in TestMessageContext
+  - IDocumentSession for Marten with any framework (Moq, NSubstitute)
+
 > Personal opinion:
 >
 > - Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects

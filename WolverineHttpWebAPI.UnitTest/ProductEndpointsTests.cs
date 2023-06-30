@@ -1,7 +1,7 @@
 namespace WolverineHttpWebAPI.UnitTest;
 
 /// <summary>
-/// This is an example of unit testing our work and mock 2 main components:
+/// This is an example of unit testing our work and mocking 2 main components:
 /// 1) IMessageBus or IMessageContext for Wolverine
 /// 2) IDocumentSession for Marten
 ///

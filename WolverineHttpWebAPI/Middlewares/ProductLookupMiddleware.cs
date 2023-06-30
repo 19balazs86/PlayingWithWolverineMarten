@@ -6,7 +6,7 @@ namespace WolverineHttpWebAPI.Middlewares;
 
 // You can make the middleware static and pass the ILogger in method parameter, which is good.
 // But in that case the ILogger will be ILogger<HandlerType>. It is not bad...
-public class ProductLookupMiddleware
+public sealed class ProductLookupMiddleware
 {
     private readonly ILogger<ProductLookupMiddleware> _logger;
 
@@ -39,8 +39,8 @@ public class ProductLookupMiddleware
 
         _logger.LogInformation("Is Product found = {answer}", product is not null);
 
-        // When you stop it, the Handler won't be reached, and the HTTP response will be 'OK'.
-        var continuation = product is null ? HandlerContinuation.Stop : HandlerContinuation.Continue;
+        // When you stop it, your handler won't be reached, and the HTTP response will be 'OK'. Would be better NotFound, like abowe.
+        var continuation = product is { IsDeleted: false } ? HandlerContinuation.Continue : HandlerContinuation.Stop;
 
         return (continuation, product);
     }

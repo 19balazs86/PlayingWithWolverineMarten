@@ -32,9 +32,9 @@ They can be used individually as they serve their own purpose, but they can be i
 > Personal opinion:
 >
 > - Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects
-> - They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details.
+> - They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details
 > - The documentation is very good and sufficient length to keep you occupied
-> - Unit and Integration tests are like a dream using with Alba (also from 'Critter Stack' family)
+> - Unit and Integration tests are like a dream with Alba (also from 'Critter Stack' family)
 
 ##### Resources - Wolwerine and MartenDB
 
@@ -43,7 +43,9 @@ They can be used individually as they serve their own purpose, but they can be i
 ##### Resources - Wolwerine
 
 - [Wolverine](https://wolverine.netlify.app) 📓*Offical documentation*
-- [Sample projects](https://wolverine.netlify.app/guide/samples.html) 📓*Offical doc*
+  - [Sample projects](https://wolverine.netlify.app/guide/samples.html)
+  - [Tesing](https://wolverine.netlify.app/guide/testing.html)
+
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
 - [Your next messaging library](https://youtu.be/EGwepoGG0CM) 📽️*1h13min - JetBrains - Jeremy Miller*
 

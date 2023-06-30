@@ -51,7 +51,6 @@ They can be used individually as they serve their own purpose, but they can be i
 - [Wolverine](https://wolverine.netlify.app) 📓*Offical documentation*
   - [Sample projects](https://wolverine.netlify.app/guide/samples.html)
   - [Tesing](https://wolverine.netlify.app/guide/testing.html)
-
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
 - [Your next messaging library](https://youtu.be/EGwepoGG0CM) 📽️*1h13min - JetBrains - Jeremy Miller*
 

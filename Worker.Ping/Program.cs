@@ -52,8 +52,8 @@ public static class Program
     {
         // TODO: Uncomment a worker to test
 
-        //services.AddHostedService<Workers.LocalPingWorker>();
-        services.AddHostedService<Workers.PingWorker>();
+        services.AddHostedService<Workers.LocalPingWorker>();
+        //services.AddHostedService<Workers.PingWorker>();
         //services.AddHostedService<Workers.RequestWorker>();
 
         services.AddResourceSetupOnStartup();

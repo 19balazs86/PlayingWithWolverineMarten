@@ -1,4 +1,4 @@
-<Project>
+﻿<Project>
   <PropertyGroup>
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
@@ -7,9 +7,9 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     <PackageVersion Include="Bogus" Version="34.0.2" />
 
-    <PackageVersion Include="WolverineFx.RabbitMQ" Version="1.1.1" />
-    <PackageVersion Include="WolverineFx.Http" Version="1.1.1" />
-    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="1.1.1" />
-    <PackageVersion Include="WolverineFx.Marten" Version="1.1.1" />
+    <PackageVersion Include="WolverineFx.RabbitMQ" Version="1.1.2" />
+    <PackageVersion Include="WolverineFx.Http" Version="1.1.2" />
+    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="1.1.2" />
+    <PackageVersion Include="WolverineFx.Marten" Version="1.1.2" />
   </ItemGroup>
 </Project>

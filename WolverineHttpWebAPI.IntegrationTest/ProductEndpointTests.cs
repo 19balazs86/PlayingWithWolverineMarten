@@ -76,9 +76,9 @@ public sealed class ProductEndpointTests : EndpointTestBase
 
         Assert.Equal(productId, productCreated.Id);
 
-        await using IDocumentSession documentSession = _documentStore.LightweightSession();
+        await using IQuerySession querySession = _documentStore.QuerySession();
 
-        Product? storedProduct = await documentSession.LoadAsync<Product>(productId);
+        Product? storedProduct = await querySession.LoadAsync<Product>(productId);
 
         Assert.NotNull(storedProduct);
     }

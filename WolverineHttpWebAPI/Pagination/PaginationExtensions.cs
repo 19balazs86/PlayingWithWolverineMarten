@@ -44,10 +44,9 @@ public static class Pagination
         PageQuery<T> query,
         CancellationToken cancellation)
     {
-        if (query.FilterDefinition is null)
-            throw new NullReferenceException("PageQuery.FilterDefinition can not be null.");
-
-        long totalCount = await queryable.CountAsync(query.FilterDefinition, cancellation);
+        long totalCount = query.FilterDefinition is null ?
+            await queryable.CountAsync(cancellation) :
+            await queryable.CountAsync(query.FilterDefinition, cancellation);
 
         if (totalCount == 0)
             return (Enumerable.Empty<T>().AsQueryable(), 0, 0);
@@ -59,7 +58,10 @@ public static class Pagination
 
         int skip = (query.Page - 1) * query.PageSize;
 
-        IQueryable<T> queryableItems = queryable.Where(query.FilterDefinition);
+        IQueryable<T> queryableItems = queryable;
+
+        if (query.FilterDefinition is not null)
+            queryableItems = queryable.Where(query.FilterDefinition);
 
         if (query.SortDefinition is not null)
             queryableItems = query.SortDefinition(queryableItems);

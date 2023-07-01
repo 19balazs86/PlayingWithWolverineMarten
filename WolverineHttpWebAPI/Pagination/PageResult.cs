@@ -5,12 +5,12 @@ namespace WolverineHttpWebAPI.Pagination;
 [DebuggerDisplay("Page = {Page}, PageCount = {PageCount}, TotalCount = {TotalCount}, IsEmpty = {IsEmpty}")]
 public class PageResult<TEntity>
 {
-    public IEnumerable<TEntity> Items { get; private set; }
+    public IEnumerable<TEntity> Items { get; init; }
 
-    public int Page { get; private set; }
-    public int PageSize { get; private set; }
-    public int PageCount { get; private set; }
-    public long TotalCount { get; private set; }
+    public int Page { get; init; }
+    public int PageSize { get; init; }
+    public int PageCount { get; init; }
+    public long TotalCount { get; init; }
 
     public bool IsEmpty => Items == null || !Items.Any();
     public bool IsNotEmpty => !IsEmpty;

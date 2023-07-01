@@ -35,6 +35,18 @@ They can be used individually as they serve their own purpose, but they can be i
   - IMessageBus or IMessageContext for Wolverine with the built-in TestMessageContext
   - IDocumentSession for Marten with any framework (Moq, NSubstitute)
 
+###### WolverineHttpWebAPI.IntegrationTest
+
+- An example of integration testing the Web API using
+  - [Alba](https://jasperfx.github.io/alba) to spin up Web API in memory using the built-in TestServer
+  - [Testcontainers](https://github.com/19balazs86/PlayingWithTestContainers) to get a new PostgresDB for our test and throw it away at the end
+- You can disable external Wolverine transports to have an isolated environment
+- You can run HTTP requests against you API
+- Wolverine provides you with a built-in mechanism called TrackedSession that ensures certain events/messages are sent out
+- You can trigger any handlers by invoking them from outside and simulate that you received a message from RabbitMQ
+- Using a feature of Marten, you can easily wipe out all data and initialize it again before running all the tests
+- All of these features are extremely good to work with
+
 > Personal opinion:
 >
 > - Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects

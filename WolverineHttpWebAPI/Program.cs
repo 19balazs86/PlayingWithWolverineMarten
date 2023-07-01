@@ -25,6 +25,8 @@ public class Program
         IConfiguration configuration  = builder.Configuration;
         IHostBuilder hostBuilder      = builder.Host;
 
+        bool isDevelopment = builder.Environment.IsDevelopment();
+
         // Add services to the container
         {
             hostBuilder.ApplyOaktonExtensions(); // app.RunOaktonCommands need this
@@ -41,7 +43,10 @@ public class Program
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            services.AddHostedService<DataBaseInitializer_HostedService>();
+            if (isDevelopment)
+            {
+                services.AddHostedService<DataBaseInitializer_HostedService>();
+            }
         }
 
         WebApplication app = builder.Build();

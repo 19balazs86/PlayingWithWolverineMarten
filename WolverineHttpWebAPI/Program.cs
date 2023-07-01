@@ -16,7 +16,7 @@ using WolverineHttpWebAPI.Services;
 
 namespace WolverineHttpWebAPI;
 
-public static class Program
+public class Program
 {
     public static async Task<int> Main(string[] args)
     {
@@ -81,7 +81,7 @@ public static class Program
 
         options.UseFluentValidation();
 
-        options.Services.configureLamarServices();
+        configureLamarServices(options.Services);
     }
 
     private static void configureMarten(StoreOptions options, IConfiguration configuration)
@@ -98,7 +98,7 @@ public static class Program
         options.UseDefaultSerialization(enumStorage: EnumStorage.AsString);
     }
 
-    private static void configureLamarServices(this ServiceRegistry services)
+    private static void configureLamarServices(ServiceRegistry services)
     {
         services.AddResourceSetupOnStartup();
 

@@ -24,12 +24,15 @@ public sealed class DataBaseInitializer_HostedService : IHostedService
         if (hasAnyDocument)
             return;
 
-        await seedAsync(documentDb);
+        await documentDb.DocumentStore.SeedProductAsync(100, cancellationToken);
     }
 
     public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+}
 
-    private static async Task seedAsync(IDocumentSession documentDb)
+public static class DocumentStoreExtensions
+{
+    public static async Task SeedProductAsync(this IDocumentStore documentStore, int count, CancellationToken cancellationToken)
     {
         var products = new Faker<Product>()
             //.RuleFor(p => p.Id, _ => id++) // No need. The auto increment works well.
@@ -38,10 +41,8 @@ public sealed class DataBaseInitializer_HostedService : IHostedService
             .RuleFor(p => p.Description,  f => f.Lorem.Sentence())
             .RuleFor(p => p.CreatedDate,  f => f.Date.Recent(10).ToUniversalTime())
             .RuleFor(p => p.CategoryEnum, f => f.PickRandom<CategoryEnum>())
-            .Generate(100);
+            .Generate(count);
 
-        IDocumentStore documentStore = documentDb.DocumentStore;
-
-        await documentStore.BulkInsertAsync(products, batchSize: products.Count);
+        await documentStore.BulkInsertAsync(products, batchSize: products.Count, cancellation: cancellationToken);
     }
 }

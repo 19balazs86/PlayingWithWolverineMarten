@@ -12,6 +12,7 @@ using WolverineHttpWebAPI.Endpoints;
 using WolverineHttpWebAPI.Entities;
 using WolverineHttpWebAPI.Infrastructure;
 using WolverineHttpWebAPI.Middlewares;
+using WolverineHttpWebAPI.Services;
 
 namespace WolverineHttpWebAPI;
 
@@ -21,6 +22,7 @@ public static class Program
     {
         WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
         IServiceCollection services   = builder.Services;
+        IConfiguration configuration  = builder.Configuration;
         IHostBuilder hostBuilder      = builder.Host;
 
         // Add services to the container
@@ -29,15 +31,15 @@ public static class Program
 
             hostBuilder.UseWolverine(configureWolverine);
 
+            services
+                .AddMarten(options => configureMarten(options, configuration))
+                .UseLightweightSessions()
+                .IntegrateWithWolverine();
+
             services.AddProblemDetails();
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
-
-            services
-                .AddMarten(configureMarten)
-                .UseLightweightSessions()
-                .IntegrateWithWolverine();
 
             services.AddHostedService<DataBaseInitializer_HostedService>();
         }
@@ -82,11 +84,14 @@ public static class Program
         options.Services.configureLamarServices();
     }
 
-    private static void configureMarten(StoreOptions options)
+    private static void configureMarten(StoreOptions options, IConfiguration configuration)
     {
-        options.Connection("Host=localhost;Port=5432;Username=postgres;Password=postgrespw;Database=postgres;");
+        string postgreSqlConnString = configuration.GetConnectionString("PostgreSQL")
+            ?? throw new NullReferenceException("Missing PostgreSQL connection string");
 
-        options.DatabaseSchemaName = "public";
+        options.Connection(postgreSqlConnString);
+
+        options.DatabaseSchemaName = "public"; // It is 'public' by default
 
         options.AutoCreateSchemaObjects = AutoCreate.All; // It is 'All' by default
 
@@ -96,5 +101,7 @@ public static class Program
     private static void configureLamarServices(this ServiceRegistry services)
     {
         services.AddResourceSetupOnStartup();
+
+        services.AddScoped<IScopedTestService, ScopedTestService>();
     }
 }

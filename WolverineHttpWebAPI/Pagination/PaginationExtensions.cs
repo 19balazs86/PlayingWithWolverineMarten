@@ -1,7 +1,6 @@
 using Marten;
-using WolverineHttpWebAPI.Pagination;
 
-namespace PlayingWithMongoDB.Mongo;
+namespace WolverineHttpWebAPI.Pagination;
 
 public static class Pagination
 {

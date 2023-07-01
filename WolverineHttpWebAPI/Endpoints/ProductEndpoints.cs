@@ -1,6 +1,5 @@
 ﻿using Marten;
 using Microsoft.AspNetCore.Http.HttpResults;
-using PlayingWithMongoDB.Mongo;
 using Wolverine;
 using Wolverine.Attributes;
 using Wolverine.Http;

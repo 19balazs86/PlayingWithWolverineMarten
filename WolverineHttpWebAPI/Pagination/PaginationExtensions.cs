@@ -2,7 +2,7 @@ using Marten;
 
 namespace WolverineHttpWebAPI.Pagination;
 
-public static class Pagination
+public static class PaginationExtensions
 {
     public static async Task<PageResult<T>> PaginateAsync<T>(
         this IQueryable<T> queryable,
@@ -44,6 +44,8 @@ public static class Pagination
         PageQuery<T> query,
         CancellationToken cancellation)
     {
+        // There is a Marten.Pagination.PagedList<> class for pagination, but I found the following better.
+
         long totalCount = query.FilterDefinition is null ?
             await queryable.CountAsync(cancellation) :
             await queryable.CountAsync(query.FilterDefinition, cancellation);

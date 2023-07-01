@@ -12,14 +12,15 @@ public static class HelloEndpoints
     [WolverineGet("/", Name = "Redirect to Swagger")]
     public static RedirectHttpResult Get() => TypedResults.Redirect("/swagger");
 
-    // Note: Right now there is an issue to get services from DI container in the generated Wolverine Http handler
-    // It creates a new object wven if you mark it FromServices
+    // Note: In the generated Wolverine HTTP handler, there is a new ScopedTestService class created
+    // It creates a new object even if you mark it FromServices
+    // Getting services from DI container use the IServiceProvider
     [WolverineGet("/TestScopeLifetime")]
-    public static string TestScopeLifetime([FromServices] IScopedTestService testService, IServiceProvider serviceProvider)
+    public static string TestScopeLifetime([FromServices] ScopedTestService testService1, IServiceProvider serviceProvider)
     {
-        var testService2 = serviceProvider.GetRequiredService<IScopedTestService>();
+        var testService2 = serviceProvider.GetRequiredService<ScopedTestService>();
 
-        return $"{testService.GetScopeId()}\r\n{testService2.GetScopeId()}";
+        return $"{testService1.GetScopeId()}\r\n{testService2.GetScopeId()}";
     }
 
     // This is not Wolverine related

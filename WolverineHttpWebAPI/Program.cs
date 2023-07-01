@@ -107,6 +107,6 @@ public class Program
     {
         services.AddResourceSetupOnStartup();
 
-        services.AddScoped<IScopedTestService, ScopedTestService>();
+        services.AddScoped<ScopedTestService>();
     }
 }

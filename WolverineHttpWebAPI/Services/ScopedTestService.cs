@@ -1,11 +1,6 @@
 ﻿namespace WolverineHttpWebAPI.Services;
 
-public interface IScopedTestService
-{
-    string GetScopeId();
-}
-
-public sealed class ScopedTestService : IScopedTestService
+public sealed class ScopedTestService
 {
     private readonly string _id = Guid.NewGuid().ToString();
 

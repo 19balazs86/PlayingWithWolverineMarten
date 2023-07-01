@@ -61,16 +61,14 @@ public sealed class AlbaHostFixture : IAsyncLifetime
 
     private IConfiguration createAppConfiguration()
     {
-        var builder = new ConfigurationBuilder();
-
         var configurationOverridden = new Dictionary<string, string>
         {
             ["ConnectionStrings:PostgreSQL"] = _postgreSqlContainer.GetConnectionString()
         };
 
-        builder.AddInMemoryCollection(configurationOverridden!);
-
-        return builder.Build();
+        return new ConfigurationBuilder()
+            .AddInMemoryCollection(configurationOverridden!)
+            .Build();
     }
 
     public async Task DisposeAsync()

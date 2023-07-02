@@ -9,14 +9,9 @@ public static class PaginationExtensions
         PageQuery<T> query,
         CancellationToken cancellation = default)
     {
-        (IQueryable<T> queryableItems, long totalCount, int pageCount) = await queryable.initQueryable(query, cancellation);
+        return await queryable.innerPaginateAsync(query, applyProjection, cancellation);
 
-        if (totalCount == 0)
-            return PageResult<T>.Empty;
-
-        IEnumerable<T> items = await queryableItems.ToListAsync(cancellation);
-
-        return new PageResult<T>(items, query.Page, query.PageSize, pageCount, totalCount);
+        static IQueryable<T> applyProjection(IQueryable<T> tQueryable) => tQueryable; // Local function. No projection
     }
 
     public static async Task<PageResult<P>> PaginateAsync<T, P>(
@@ -27,51 +22,56 @@ public static class PaginationExtensions
         if (query.ProjectionDefinition is null)
             throw new NullReferenceException("PageQuery.ProjectionDefinition can not be null.");
 
-        (IQueryable<T> queryableItems, long totalCount, int pageCount) = await queryable.initQueryable(query, cancellation);
+        return await queryable.innerPaginateAsync(query, applyProjection, cancellation);
 
-        if (totalCount == 0)
-            return PageResult<P>.Empty;
-
-        IEnumerable<P> items = await queryableItems
-            .Select(query.ProjectionDefinition)
-            .ToListAsync(cancellation);
-
-        return new PageResult<P>(items, query.Page, query.PageSize, pageCount, totalCount);
+        IQueryable<P> applyProjection(IQueryable<T> tQueryable) // Local function
+        {
+            return tQueryable.Select(query.ProjectionDefinition);
+        }
     }
 
-    private static async Task<(IQueryable<T> QueryableItems, long TotalCount, int PageCount)> initQueryable<T>(
+    private static async Task<PageResult<P>> innerPaginateAsync<T, P>(
         this IQueryable<T> queryable,
         PageQuery<T> query,
+        Func<IQueryable<T>, IQueryable<P>> applyProjection,
         CancellationToken cancellation)
     {
-        // There is a Marten.Pagination.PagedList<> class for pagination, but I found the following better.
+        // There is a Marten.Pagination.PagedList<> class for pagination, but I found the following better
 
-        long totalCount = query.FilterDefinition is null ?
-            await queryable.CountAsync(cancellation) :
-            await queryable.CountAsync(query.FilterDefinition, cancellation);
+        if (query.FilterDefinition is not null)
+        {
+            queryable = queryable.Where(query.FilterDefinition);
+        }
+
+        long totalCount = await queryable.CountAsync(cancellation); // CountAsync(query.FilterDefinition);
 
         if (totalCount == 0)
-            return (Enumerable.Empty<T>().AsQueryable(), 0, 0);
+        {
+            return PageResult<P>.Empty;
+        }
 
         int pageCount = (int)Math.Ceiling((decimal)totalCount / query.PageSize);
 
         if (query.Page > pageCount)
+        {
             query.Page = pageCount;
+        }
 
         int skip = (query.Page - 1) * query.PageSize;
 
-        IQueryable<T> queryableItems = queryable;
-
-        if (query.FilterDefinition is not null)
-            queryableItems = queryable.Where(query.FilterDefinition);
-
         if (query.SortDefinition is not null)
-            queryableItems = query.SortDefinition(queryableItems);
+        {
+            queryable = query.SortDefinition(queryable);
+        }
 
-        queryableItems = queryableItems
+        queryable = queryable
             .Skip(skip)
             .Take(query.PageSize);
 
-        return (queryableItems, totalCount, pageCount);
+        IQueryable<P> projectionQueryable = applyProjection(queryable);
+
+        IEnumerable<P> items = await projectionQueryable.ToListAsync(cancellation);
+
+        return new PageResult<P>(items, query.Page, query.PageSize, pageCount, totalCount);
     }
 }

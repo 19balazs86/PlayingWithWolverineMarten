@@ -13,9 +13,7 @@ public static class PageQueryExtensions
     }
 
     // Sort for PageQuery<T>
-    public static PageQuery<T> Sort<T, TKey>(
-        this PageQuery<T> pageQuery,
-        Expression<Func<T, TKey>> sortFunc)
+    public static PageQuery<T> Sort<T, TKey>(this PageQuery<T> pageQuery, Expression<Func<T, TKey>> sortFunc)
     {
         pageQuery.SortDefinition = items => items.OrderBy(sortFunc);
 
@@ -31,9 +29,7 @@ public static class PageQueryExtensions
     }
 
     // Sort for PageQuery<T, P>
-    public static PageQuery<T, P> Sort<T, P, TKey>(
-        this PageQuery<T, P> pageQuery,
-        Expression<Func<T, TKey>> sortFunc)
+    public static PageQuery<T, P> Sort<T, P, TKey>(this PageQuery<T, P> pageQuery, Expression<Func<T, TKey>> sortFunc)
     {
         pageQuery.SortDefinition = items => items.OrderBy(sortFunc);
 

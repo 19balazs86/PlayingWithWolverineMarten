@@ -190,17 +190,8 @@
 			"request": {
 				"method": "DELETE",
 				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"Id\": 10\r\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
 				"url": {
-					"raw": "http://localhost:5000/api/Product",
+					"raw": "http://localhost:5000/api/Product/10",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -208,7 +199,8 @@
 					"port": "5000",
 					"path": [
 						"api",
-						"Product"
+						"Product",
+						"10"
 					]
 				}
 			},

@@ -19,7 +19,7 @@ public static class ProductEndpoints
     {
         var pageQuery = PageQuery<Product, ProductDto>
             .Create(pageNumber, pageSize)
-            .Filter(p => !p.IsDeleted)
+            //.Filter(p => !p.IsDeleted) // SoftDeleted is enabled
             .Sort(p => p.Id)
             .Project(Mappers.ProductToDtoProjection);
 
@@ -35,7 +35,7 @@ public static class ProductEndpoints
 
         return await querySession
             .Query<Product>()
-            .Where(p => p.Id == id && !p.IsDeleted)
+            .Where(p => p.Id == id)
             .Select(Mappers.ProductToDtoProjection) // You can use ProjectToType<ProductDto> method from Mapster
             .FirstOrDefaultAsync(cancellationToken);
     }
@@ -91,26 +91,16 @@ public static class ProductEndpoints
         return TypedResults.Ok(updateProduct);
     }
 
-    [WolverineDelete("/api/Product")]
-    public static async Task Delete(DeleteProduct deleteProduct, Product product, IDocumentSession documentSession)
+    [WolverineDelete("/api/Product/{id}")]
+    public static async Task Delete(int id, IDocumentSession documentSession)
     {
         // Note: ProductLookupMiddleware is called before this handler, and it provides the Product
 
-        // documentSession.Delete<Product>(deleteProduct.id);
-
         if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to make it in JSON format.
-            throw new Exception($"Random error during deleting the product({deleteProduct.Id})");
+            throw new Exception($"Random error during deleting the product({id})");
 
-        //Product? product = await documentSession
-        //    .Query<Product>()
-        //    .Where(p => p.Id == deleteProduct.Id && !p.IsDeleted)
-        //    .FirstOrDefaultAsync();
-
-        //if (product is null) return;
-
-        product.IsDeleted = true;
-
-        documentSession.Update(product);
+        documentSession.Delete<Product>(id); // SoftDeleted is enabled
+        //documentSession.HardDelete<Product>(id);
 
         // Call it manually, becase there is no [Transactional] / Policies.AutoApplyTransactions middleware included.
         await documentSession.SaveChangesAsync();

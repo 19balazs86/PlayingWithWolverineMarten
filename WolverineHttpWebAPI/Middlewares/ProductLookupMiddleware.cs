@@ -21,11 +21,14 @@ public sealed class ProductLookupMiddleware
     //    IDocumentSession documentSession,
     //    CancellationToken cancellation)
     //{
-    //    Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+    //    // This can load the soft-deleted entities
+    //    // Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+
+    //    Product? product = await documentSession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
 
     //    _logger.LogInformation("Is Product found = {answer}", product is not null);
 
-    //    IResult result = product is { IsDeleted: false } ? WolverineContinue.Result() : TypedResults.NotFound();
+    //    IResult result = product is null ? TypedResults.NotFound() : WolverineContinue.Result();
 
     //    return (result, product);
     //}
@@ -35,12 +38,15 @@ public sealed class ProductLookupMiddleware
         IDocumentSession documentSession,
         CancellationToken cancellation)
     {
-        Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+        // This can load the soft-deleted entities
+        // Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+
+        Product? product = await documentSession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
 
         _logger.LogInformation("Is Product found = {answer}", product is not null);
 
         // When you stop it, your handler won't be reached, and the HTTP response will be 'OK'. Would be better NotFound, like abowe.
-        var continuation = product is { IsDeleted: false } ? HandlerContinuation.Continue : HandlerContinuation.Stop;
+        var continuation = product is null ? HandlerContinuation.Stop : HandlerContinuation.Continue;
 
         return (continuation, product);
     }

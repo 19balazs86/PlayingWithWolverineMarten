@@ -20,8 +20,6 @@ public interface IProductLookup
     int Id { get; init; }
 }
 
-public readonly record struct DeleteProduct(int Id) : IProductLookup;
-
 // Validation automatically applied due to the inheritance
 public sealed class UpdateProduct : CreateProduct, IProductLookup
 {

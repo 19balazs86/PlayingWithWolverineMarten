@@ -17,13 +17,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWebAPI", "WolverineHttpWebAPI\WolverineHttpWebAPI.csproj", "{9434B75F-EEA4-4E7B-8224-BDEC45B166DF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWithMarten", "WolverineHttpWithMarten\WolverineHttpWithMarten.csproj", "{9434B75F-EEA4-4E7B-8224-BDEC45B166DF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5BD59246-84B8-49D9-A69F-F39F09A865C6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWebAPI.UnitTest", "WolverineHttpWebAPI.UnitTest\WolverineHttpWebAPI.UnitTest.csproj", "{8E54D379-CBB1-4647-972E-D75035E12854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWithMarten.UnitTest", "WolverineHttpWithMarten.UnitTest\WolverineHttpWithMarten.UnitTest.csproj", "{8E54D379-CBB1-4647-972E-D75035E12854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolverineHttpWebAPI.IntegrationTest", "WolverineHttpWebAPI.IntegrationTest\WolverineHttpWebAPI.IntegrationTest.csproj", "{7DA52992-5922-468B-B343-612486E0A191}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolverineHttpWithMarten.IntegrationTest", "WolverineHttpWithMarten.IntegrationTest\WolverineHttpWithMarten.IntegrationTest.csproj", "{7DA52992-5922-468B-B343-612486E0A191}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

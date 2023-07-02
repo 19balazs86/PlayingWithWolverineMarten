@@ -11,7 +11,7 @@ They can be used individually as they serve their own purpose, but they can be i
 
 ##### The solution has the following projects
 
-###### WolverineHttpWebAPI
+###### WolverineHttpWithMarten
 
 - Web API using WolverineFx.Http for managing Http endpoint routing
 - Using Marten to store a Product entity and DurableInbox for local queue messages in a transaction
@@ -29,13 +29,13 @@ They can be used individually as they serve their own purpose, but they can be i
 - Listening for PingMessage and send a PongMessage via RabbitMq
 - Getting RequestMessage via RabbitMq and send back a ResponseMessage via RabbitMq response-queue
 
-###### WolverineHttpWebAPI.UnitTest
+###### WolverineHttpWithMarten.UnitTest
 
 - An example of unit testing our work and mocking 2 main components
   - IMessageBus or IMessageContext for Wolverine with the built-in TestMessageContext
   - IDocumentSession for Marten with any framework (Moq, NSubstitute)
 
-###### WolverineHttpWebAPI.IntegrationTest
+###### WolverineHttpWithMarten.IntegrationTest
 
 - An example of integration testing the Web API using
   - [Alba](https://jasperfx.github.io/alba) to spin up Web API in memory using the built-in TestServer

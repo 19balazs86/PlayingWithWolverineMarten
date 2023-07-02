@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "09eea4ac-c554-4ab2-80fc-2c0b79aa03ab",
-		"name": "WolverineHttpWebAPI",
+		"name": "WolverineHttpWithMarten",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "8316451"
 	},

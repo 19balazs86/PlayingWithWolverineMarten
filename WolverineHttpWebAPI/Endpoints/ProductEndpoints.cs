@@ -94,9 +94,7 @@ public static class ProductEndpoints
     [WolverineDelete("/api/Product/{id}")]
     public static async Task Delete(int id, IDocumentSession documentSession)
     {
-        // Note: ProductLookupMiddleware is called before this handler, and it provides the Product
-
-        if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to make it in JSON format.
+        if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to return with return with JSON.
             throw new Exception($"Random error during deleting the product({id})");
 
         documentSession.Delete<Product>(id); // SoftDeleted is enabled

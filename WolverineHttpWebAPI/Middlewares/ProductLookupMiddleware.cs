@@ -18,13 +18,13 @@ public sealed class ProductLookupMiddleware
     // !!! Right now this Validation middleware cause an exception in case of IResult response
     //public async Task<(IResult, Product?)> BeforeAsync(
     //    IProductLookup productLookup,
-    //    IDocumentSession documentSession,
+    //    IQuerySession querySession,
     //    CancellationToken cancellation)
     //{
     //    // This can load the soft-deleted entities
-    //    // Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+    //    // Product? product = await querySession.LoadAsync<Product>(productLookup.Id, cancellation);
 
-    //    Product? product = await documentSession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
+    //    Product? product = await querySession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
 
     //    _logger.LogInformation("Is Product found = {answer}", product is not null);
 
@@ -35,13 +35,13 @@ public sealed class ProductLookupMiddleware
 
     public async Task<(HandlerContinuation, Product?)> BeforeAsync(
         IProductLookup productLookup,
-        IDocumentSession documentSession,
+        IQuerySession querySession,
         CancellationToken cancellation)
     {
         // This can load the soft-deleted entities
-        // Product? product = await documentSession.LoadAsync<Product>(productLookup.Id, cancellation);
+        // Product? product = await querySession.LoadAsync<Product>(productLookup.Id, cancellation);
 
-        Product? product = await documentSession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
+        Product? product = await querySession.Query<Product>().FirstOrDefaultAsync(p => p.Id == productLookup.Id, cancellation);
 
         _logger.LogInformation("Is Product found = {answer}", product is not null);
 

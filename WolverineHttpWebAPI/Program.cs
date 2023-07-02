@@ -12,7 +12,6 @@ using WolverineHttpWebAPI.Endpoints;
 using WolverineHttpWebAPI.Entities;
 using WolverineHttpWebAPI.Infrastructure;
 using WolverineHttpWebAPI.Middlewares;
-using WolverineHttpWebAPI.Services;
 
 namespace WolverineHttpWebAPI;
 
@@ -106,7 +105,5 @@ public class Program
     private static void configureLamarServices(ServiceRegistry services)
     {
         services.AddResourceSetupOnStartup();
-
-        services.AddScoped<ScopedTestService>();
     }
 }

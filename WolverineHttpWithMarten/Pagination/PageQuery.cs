@@ -3,7 +3,7 @@ using System.Linq.Expressions;
 
 namespace WolverineHttpWithMarten.Pagination;
 
-public sealed class PageQueryDefaults
+public static class PageQueryDefaults
 {
     public const int PageSizeDefault = 20;
     public const int PageSizeMax     = 50;
@@ -46,7 +46,7 @@ public class PageQuery<TEntity>
 }
 
 [DebuggerDisplay("Page = {Page}, PageSize = {PageSize}")]
-public class PageQuery<TEntity, TProjection> : PageQuery<TEntity>
+public sealed class PageQuery<TEntity, TProjection> : PageQuery<TEntity>
 {
     public Expression<Func<TEntity, TProjection>>? ProjectionDefinition { get; set; }
 

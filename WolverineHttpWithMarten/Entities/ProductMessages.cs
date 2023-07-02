@@ -2,9 +2,6 @@
 
 namespace WolverineHttpWithMarten.Entities;
 
-/// <summary>
-/// Request for create a product.
-/// </summary>
 public class CreateProduct
 {
     public string Name { get; init; } = string.Empty;
@@ -24,4 +21,12 @@ public interface IProductLookup
 public sealed class UpdateProduct : CreateProduct, IProductLookup
 {
     public int Id { get ; init ; }
+}
+
+public record ProductCreated(int Id)
+{
+    public static ProductCreated FromId(int Id)
+    {
+        return new ProductCreated(Id);
+    }
 }

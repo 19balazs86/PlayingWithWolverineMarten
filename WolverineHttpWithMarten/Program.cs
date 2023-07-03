@@ -35,17 +35,16 @@ public class Program
             services
                 .AddMarten(options => configureMarten(options, configuration))
                 .UseLightweightSessions()
-                .IntegrateWithWolverine();
+                .IntegrateWithWolverine()
+                .ApplyWhen(isDevelopment, martenConf => martenConf.InitializeWith(InitialProductData.Create()));
+
+            // services.InitializeMartenWith(InitialProductData.Create()); // This also works
 
             services.AddProblemDetails();
 
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
 
-            if (isDevelopment)
-            {
-                services.AddHostedService<DataBaseInitializer_HostedService>();
-            }
         }
 
         WebApplication app = builder.Build();

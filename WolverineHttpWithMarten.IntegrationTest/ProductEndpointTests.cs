@@ -2,6 +2,7 @@ using Alba;
 using Marten;
 using Wolverine.Tracking;
 using WolverineHttpWithMarten.Entities;
+using WolverineHttpWithMarten.Infrastructure;
 using WolverineHttpWithMarten.Pagination;
 
 namespace WebAPI.IntegrationTests;
@@ -33,8 +34,8 @@ public sealed class ProductEndpointTests : EndpointTestBase
 
         // Assert
         Assert.NotNull(pagedProducts);
-        Assert.Equal(InitialProductData.InitialProductCount, pagedProducts.TotalCount);
-        Assert.Equal(InitialProductData.InitialProductCount, pagedProducts.Items.Count());
+        Assert.Equal(InitialProductData.ProductCount_IntegrationTest, pagedProducts.TotalCount);
+        Assert.Equal(InitialProductData.ProductCount_IntegrationTest, pagedProducts.Items.Count());
     }
 
     [Fact]

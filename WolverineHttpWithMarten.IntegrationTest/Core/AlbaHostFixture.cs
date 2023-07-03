@@ -6,6 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Oakton;
 using Testcontainers.PostgreSql;
 using Wolverine;
+using WolverineHttpWithMarten.Infrastructure;
 
 namespace WolverineHttpWithMarten.IntegrationTest.Core;
 
@@ -45,7 +46,7 @@ public sealed class AlbaHostFixture : IAsyncLifetime
     {
         services.DisableAllExternalWolverineTransports();
 
-        services.InitializeMartenWith<InitialProductData>();
+        services.InitializeMartenWith(InitialProductData.Create(InitialProductData.ProductCount_IntegrationTest));
     }
 
     // This is working in PlayingWithTestContainers. But now, somehow the in-memory configuration applied later than you GetConnectionString

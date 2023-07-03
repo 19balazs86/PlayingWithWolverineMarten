@@ -1,5 +1,6 @@
 using Lamar;
 using Marten;
+using Marten.Services.Json;
 using Oakton;
 using Oakton.Resources;
 using Weasel.Core;
@@ -36,6 +37,7 @@ public class Program
                 .AddMarten(options => configureMarten(options, configuration))
                 .UseLightweightSessions()
                 .IntegrateWithWolverine()
+                .InitializeWith() // https://martendb.io/configuration/hostbuilder.html#eager-initialization-of-the-documentstore
                 .ApplyWhen(isDevelopment, martenConf => martenConf.InitializeWith<InitialProductData>());
 
             // services.InitializeMartenWith<InitialProductData>(); // This also works
@@ -98,7 +100,9 @@ public class Program
 
         options.AutoCreateSchemaObjects = AutoCreate.All; // It is 'All' by default
 
-        options.UseDefaultSerialization(enumStorage: EnumStorage.AsString);
+        options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson, enumStorage: EnumStorage.AsString);
+
+        // options.RegisterDocumentType<Product>(); // This is optional. The first time you add the document, it automatically creates the table.
     }
 
     private static void configureLamarServices(ServiceRegistry services)

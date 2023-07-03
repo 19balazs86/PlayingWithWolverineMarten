@@ -30,3 +30,11 @@ public record ProductCreated(int Id)
         return new ProductCreated(Id);
     }
 }
+
+public record ProductUpdated(int Id)
+{
+    public static ProductUpdated FromId(int Id)
+    {
+        return new ProductUpdated(Id);
+    }
+}

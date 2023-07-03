@@ -73,8 +73,10 @@ public static class ProductEndpoints
         return (response, ProductCreated.FromId(product.Id));
     }
 
+    [Transactional]
     [WolverinePut("/api/Product")]
-    public static async Task<Ok<UpdateProduct>> Update(UpdateProduct updateProduct, Product product, IDocumentSession documentSession)
+    [EmptyResponse] // Return with 204 No Content response
+    public static ProductUpdated Update(UpdateProduct updateProduct, Product product, IDocumentSession documentSession)
     {
         // Note: ProductLookupMiddleware is called before this handler, and it provides the Product
 
@@ -82,13 +84,7 @@ public static class ProductEndpoints
 
         documentSession.Update(product);
 
-        await documentSession.SaveChangesAsync();
-
-        // There is an issue with wolverine
-        // A local variable or function named 'result' is already defined in this scope
-        // In this method, can not return with IResult or Task.
-        // TODO: After the bug fixed, return with Task.
-        return TypedResults.Ok(updateProduct);
+        return ProductUpdated.FromId(product.Id);
     }
 
     [WolverineDelete("/api/Product/{id}")]

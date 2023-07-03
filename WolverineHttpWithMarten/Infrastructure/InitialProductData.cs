@@ -12,12 +12,12 @@ public sealed class InitialProductData : IInitialData
 
     private readonly int _productCount;
 
-    public InitialProductData(int productCount)
+    public InitialProductData(int productCount = ProductCount_Dev)
     {
         _productCount = productCount;
     }
 
-    public static InitialProductData Create(int productCount = ProductCount_Dev)
+    public static InitialProductData Create(int productCount)
     {
         return new InitialProductData(productCount);
     }
@@ -26,10 +26,12 @@ public sealed class InitialProductData : IInitialData
     {
         using IQuerySession querySession = store.QuerySession();
 
-        bool hasAnyDocument = await querySession.Query<Product>().AnyAsync(cancellation);
+        bool hasAnyProduct = await querySession.Query<Product>().AnyAsync(cancellation);
 
-        if (hasAnyDocument)
+        if (hasAnyProduct)
+        {
             return;
+        }
 
         await seedProductAsync(store, _productCount, cancellation);
     }

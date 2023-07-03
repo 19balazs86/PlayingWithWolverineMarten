@@ -36,9 +36,9 @@ public class Program
                 .AddMarten(options => configureMarten(options, configuration))
                 .UseLightweightSessions()
                 .IntegrateWithWolverine()
-                .ApplyWhen(isDevelopment, martenConf => martenConf.InitializeWith(InitialProductData.Create()));
+                .ApplyWhen(isDevelopment, martenConf => martenConf.InitializeWith<InitialProductData>());
 
-            // services.InitializeMartenWith(InitialProductData.Create()); // This also works
+            // services.InitializeMartenWith<InitialProductData>(); // This also works
 
             services.AddProblemDetails();
 

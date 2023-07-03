@@ -39,7 +39,7 @@ public sealed class AlbaHostFixture : IAsyncLifetime
 
         webHostBuilder.ConfigureServices(configureServices);
 
-        webHostBuilder.UseEnvironment("IntegrationTest"); // No reason other than not adding the DataBaseInitializer_HostedService
+        webHostBuilder.UseEnvironment("IntegrationTest"); // No reason other than not seeding the DB for Development test with InitialData
     }
 
     private void configureServices(IServiceCollection services)

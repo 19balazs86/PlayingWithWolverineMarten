@@ -5,7 +5,7 @@ In this repository, I have started putting together some examples of using **Wol
 Both Wolverine and Marten are part of the "Critter Stack" family of 👤[JasperFx tools](https://github.com/JasperFx), they are [Open Source projects](https://jeremydmiller.com/open-source-projects) 📓*Jeremy Miller*.
 
 - **Wolwerine**: Next generation Mediator and MessageBus, it is all about professional messaging
-- **MartenDB**: Transactional DocumentDB and EventStore using PostgreSQL
+- **Marten**: Allows developers to use the PostgreSQL database as a document database and a fully-featured EventStore
 
 They can be used individually as they serve their own purpose, but they can be integrated together to open a new door for neat features (durable Inbox and Outbox messaging).
 
@@ -49,12 +49,12 @@ They can be used individually as they serve their own purpose, but they can be i
 
 > Personal opinion:
 >
-> - Both Wolverine and Marten are more than awesome. I enjoy working with them. I can imagine Wolverine as a must have in most projects
+> - Both Wolverine and Marten are more than awesome, I enjoy working with them
 > - They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details
 > - The documentation is very good and sufficient length to keep you occupied
 > - Unit and Integration tests are like a dream with Alba (also from 'Critter Stack' family)
 
-##### Resources - Wolwerine and MartenDB
+##### Resources - Wolwerine and Marten
 
 - [Wolverine as Mediator for Amazon SQS, Inbox and Outbox using Marten](https://youtu.be/YlG3bnJ7yCc) 📽*18m -* *Raw Coding* 
 
@@ -66,7 +66,7 @@ They can be used individually as they serve their own purpose, but they can be i
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
 - [Your next messaging library](https://youtu.be/EGwepoGG0CM) 📽️*1h13min - JetBrains - Jeremy Miller*
 
-##### Resources - MartenDB
+##### Resources - Marten
 
 - [MartenDB](https://martendb.io) 📓*Offical documentation*
 - [Marten - Document DB on PostgreSQL](https://youtu.be/lgd_HxGBa-U) 📽️*20m - Raw Coding*

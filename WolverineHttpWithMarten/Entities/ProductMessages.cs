@@ -23,7 +23,7 @@ public sealed class UpdateProduct : CreateProduct, IProductLookup
     public int Id { get ; init ; }
 }
 
-public record ProductCreated(int Id)
+public sealed record ProductCreated(int Id)
 {
     public static ProductCreated FromId(int Id)
     {
@@ -31,7 +31,7 @@ public record ProductCreated(int Id)
     }
 }
 
-public record ProductUpdated(int Id)
+public sealed record ProductUpdated(int Id)
 {
     public static ProductUpdated FromId(int Id)
     {

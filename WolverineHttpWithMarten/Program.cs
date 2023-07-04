@@ -86,6 +86,8 @@ public class Program
 
         options.UseFluentValidation();
 
+        // options.CodeGeneration.TypeLoadMode = TypeLoadMode.Static; // https://wolverine.netlify.app/guide/codegen.html#optimized-workflow
+
         configureLamarServices(options.Services);
     }
 

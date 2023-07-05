@@ -39,7 +39,7 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         return current with { Counter = counter };
     }
 
-    // By method convention name | Static method does not apply the event
+    // By method convention name | Static method does not apply the event, it has to be non static in order to work
     //public CounterState Apply(CounterIncreased increment, CounterState current)
     //{
     //    long counter = current.Counter + increment.Number;

@@ -9,7 +9,7 @@ public static class CounterHandler
 {
     public static async Task<Guid> Handle(CounterStartRequest startRequest, IDocumentSession documentSession)
     {
-        Guid streamId = Guid.NewGuid();
+        Guid streamId = startRequest.Id ?? Guid.NewGuid();
 
         var counterStarted = new CounterStarted(startRequest.InitialCount);
 

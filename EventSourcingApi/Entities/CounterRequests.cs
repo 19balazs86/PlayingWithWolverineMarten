@@ -1,6 +1,6 @@
 ﻿namespace EventSourcingApi.Entities;
 
-public sealed record CounterStartRequest(int InitialCount = 0);
+public sealed record CounterStartRequest(Guid? Id, int InitialCount = 0);
 
 public sealed record CounterEventRequest(Guid Id, int Number);
 

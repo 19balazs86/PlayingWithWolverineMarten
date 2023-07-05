@@ -3,6 +3,7 @@ using EventSourcingApi.EventSourcing;
 using Lamar;
 using Marten;
 using Marten.Events.Projections;
+using Marten.Schema.Identity;
 using Marten.Services.Json;
 using Oakton;
 using Oakton.Resources;
@@ -61,6 +62,10 @@ public static class Program
         options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson, enumStorage: EnumStorage.AsString);
 
         options.Projections.Add<CounterStateProjection>(ProjectionLifecycle.Inline);
+
+        // Unlike the Guid, you CAN order by CombGuid - https://martendb.io/documents/identity.html#guid-identifiers
+        // In this example there is no meaning for that...
+        options.Schema.For<CounterState>().IdStrategy(new CombGuidIdGeneration());
     }
 
     private static void configureLamarServices(this ServiceRegistry services)

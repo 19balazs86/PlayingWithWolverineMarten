@@ -241,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"InitialCount\": 10\r\n}",
+							"raw": "{\r\n    \"Id\": \"0189264b-214e-4651-8afb-3966e06f93e1\",\r\n    \"InitialCount\": 10\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -269,7 +269,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:5017/Counter/3fcd6387-ebe3-4044-860b-7c9d07f94bbe",
+							"raw": "http://localhost:5017/Counter/0189264b-214e-4651-8afb-3966e06f93e1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -277,7 +277,7 @@
 							"port": "5017",
 							"path": [
 								"Counter",
-								"3fcd6387-ebe3-4044-860b-7c9d07f94bbe"
+								"0189264b-214e-4651-8afb-3966e06f93e1"
 							]
 						}
 					},
@@ -290,7 +290,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": \"3fcd6387-ebe3-4044-860b-7c9d07f94bbe\",\r\n    \"Number\": 100\r\n}",
+							"raw": "{\r\n    \"Id\": \"0189264b-214e-4651-8afb-3966e06f93e1\",\r\n    \"Number\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -319,7 +319,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": \"3fcd6387-ebe3-4044-860b-7c9d07f94bbe\",\r\n    \"Number\": 100\r\n}",
+							"raw": "{\r\n    \"Id\": \"0189264b-214e-4651-8afb-3966e06f93e1\",\r\n    \"Number\": 100\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

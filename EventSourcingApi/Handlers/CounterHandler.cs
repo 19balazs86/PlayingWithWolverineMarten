@@ -2,6 +2,7 @@
 using EventSourcingApi.EventSourcing;
 using Marten;
 using Marten.Events;
+using Marten.Schema.Identity;
 
 namespace EventSourcingApi.Handlers;
 
@@ -9,7 +10,7 @@ public static class CounterHandler
 {
     public static async Task<Guid> Handle(CounterStartRequest startRequest, IDocumentSession documentSession)
     {
-        Guid streamId = startRequest.Id ?? Guid.NewGuid();
+        Guid streamId = startRequest.Id ?? CombGuidIdGeneration.NewGuid();
 
         var counterStarted = new CounterStarted(startRequest.InitialCount);
 

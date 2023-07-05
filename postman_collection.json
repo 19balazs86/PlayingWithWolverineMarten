@@ -1,230 +1,347 @@
 {
 	"info": {
 		"_postman_id": "09eea4ac-c554-4ab2-80fc-2c0b79aa03ab",
-		"name": "WolverineHttpWithMarten",
+		"name": "Wolverine_Marten",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "8316451"
 	},
 	"item": [
 		{
-			"name": "GetAllProduct",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/Product?pageNumber=2&pageSize=20",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product"
-					],
-					"query": [
-						{
-							"key": "pageNumber",
-							"value": "2"
+			"name": "WolverineHttpWebAPI",
+			"item": [
+				{
+					"name": "GetAllProduct",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Product?pageNumber=2&pageSize=20",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product"
+							],
+							"query": [
+								{
+									"key": "pageNumber",
+									"value": "2"
+								},
+								{
+									"key": "pageSize",
+									"value": "20"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetProductById",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Product/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CreateProduct",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
 						},
-						{
-							"key": "pageSize",
-							"value": "20"
+						"url": {
+							"raw": "http://localhost:5000/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "GetProductById",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/Product/1",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreateProduct",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/Product",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreateProduct2",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "CreateProduct2",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Product2",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product2"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/Product2",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product2"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "CreateProduct-Invalid",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"Name\": \"\",\n    \"Price\": 0,\n    \"Description\": \"\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "CreateProduct-Invalid",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Name\": \"\",\n    \"Price\": 0,\n    \"Description\": \"\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/Product",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "UpdateProduct",
-			"protocolProfileBehavior": {
-				"disabledSystemHeaders": {}
-			},
-			"request": {
-				"method": "PUT",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category2\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "UpdateProduct",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Id\": 5,\n    \"Name\": \"PXName\",\n    \"Price\": 10,\n    \"Description\": \"PX-Description\",\n    \"CategoryEnum\": \"Category2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Product",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://localhost:5000/api/Product",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product"
-					]
+				{
+					"name": "DeleteProduct",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Product/10",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Product",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PageNotFound",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/PageNotFound",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"PageNotFound"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "DeleteProduct",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/Product/10",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"Product",
-						"10"
-					]
+			"name": "EventSourcingApi",
+			"item": [
+				{
+					"name": "CounterStart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"InitialCount\": 10\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5017/Counter/Start",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5017",
+							"path": [
+								"Counter",
+								"Start"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CounterStreamState",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5017/Counter/3fcd6387-ebe3-4044-860b-7c9d07f94bbe",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5017",
+							"path": [
+								"Counter",
+								"3fcd6387-ebe3-4044-860b-7c9d07f94bbe"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CounterSendEvent",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": \"3fcd6387-ebe3-4044-860b-7c9d07f94bbe\",\r\n    \"Number\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5017/Counter/Event",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5017",
+							"path": [
+								"Counter",
+								"Event"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CounterSendEvents",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"Id\": \"3fcd6387-ebe3-4044-860b-7c9d07f94bbe\",\r\n    \"Number\": 100\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5017/Counter/Events",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5017",
+							"path": [
+								"Counter",
+								"Events"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
-		},
-		{
-			"name": "PageNotFound",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:5000/api/PageNotFound",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "5000",
-					"path": [
-						"api",
-						"PageNotFound"
-					]
-				}
-			},
-			"response": []
+			]
 		}
 	]
 }

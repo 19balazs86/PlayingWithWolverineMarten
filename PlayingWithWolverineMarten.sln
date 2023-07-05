@@ -23,7 +23,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{5BD59246-8
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWithMarten.UnitTest", "WolverineHttpWithMarten.UnitTest\WolverineHttpWithMarten.UnitTest.csproj", "{8E54D379-CBB1-4647-972E-D75035E12854}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WolverineHttpWithMarten.IntegrationTest", "WolverineHttpWithMarten.IntegrationTest\WolverineHttpWithMarten.IntegrationTest.csproj", "{7DA52992-5922-468B-B343-612486E0A191}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WolverineHttpWithMarten.IntegrationTest", "WolverineHttpWithMarten.IntegrationTest\WolverineHttpWithMarten.IntegrationTest.csproj", "{7DA52992-5922-468B-B343-612486E0A191}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventSourcingApi", "EventSourcingApi\EventSourcingApi.csproj", "{4A84E699-E046-48FB-9D3F-CC05BB71CA54}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -55,6 +57,10 @@ Global
 		{7DA52992-5922-468B-B343-612486E0A191}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7DA52992-5922-468B-B343-612486E0A191}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7DA52992-5922-468B-B343-612486E0A191}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A84E699-E046-48FB-9D3F-CC05BB71CA54}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A84E699-E046-48FB-9D3F-CC05BB71CA54}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A84E699-E046-48FB-9D3F-CC05BB71CA54}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A84E699-E046-48FB-9D3F-CC05BB71CA54}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

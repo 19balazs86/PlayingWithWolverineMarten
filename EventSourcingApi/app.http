@@ -26,6 +26,16 @@ Content-Type: application/json
     "Number": 100
 }
 
+### Add an event with check
+
+PUT {{counterUrl}}/EventCheck
+Content-Type: application/json
+
+{
+    "Id": "{{counterId}}",
+    "Number": -100
+}
+
 ### Add multiple events
 
 PUT {{counterUrl}}/Events

@@ -13,6 +13,8 @@ public static class CounterEndpoints
 
         builder.MapPutToWolverine<CounterEventRequest, long>("/Counter/Event");
 
+        builder.MapPutToWolverine<CounterEventCheckRequest, long>("/Counter/EventCheck");
+
         builder.MapPutToWolverine<CounterParalelEventRequest>("/Counter/Events");
 
         return builder;

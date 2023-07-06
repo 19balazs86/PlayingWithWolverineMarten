@@ -33,28 +33,29 @@ public static class CounterHandler
     }
 
     // We can get the aggregation and check it, before to send any events
-    //public static async Task<long> Handle(CounterEventRequest eventRequest, IDocumentSession documentSession)
-    //{
-    //    object counterEvent = CounterFactory.CreateEvent(eventRequest.Number);
+    public static async Task<long> Handle(CounterEventCheckRequest eventRequest, IDocumentSession documentSession)
+    {
+        object counterEvent = CounterFactory.CreateEvent(eventRequest.Number);
 
-    //    // Fetch the projected aggregate with built-in optimistic concurrency checks
-    //    IEventStream<CounterState> eventStream = await documentSession.Events.FetchForWriting<CounterState>(eventRequest.Id);
+        // Fetch the projected aggregate with built-in optimistic concurrency checks
+        IEventStream<CounterState> eventStream = await documentSession.Events.FetchForWriting<CounterState>(eventRequest.Id);
 
-    //    CounterState counterState = eventStream.Aggregate;
+        CounterState counterState = eventStream.Aggregate;
 
-    //    long newCounter = counterState.Counter + eventRequest.Number;
+        long newCounter = counterState.Counter + eventRequest.Number;
 
-    //    // Counter should be -500 - 500
-    //    // We can check it before to send any events
-    //    if ((eventRequest.Number > 0 && newCounter > 500) || (eventRequest.Number < 0 && newCounter < -500))
-    //        return -1;
+        // Counter should be -500 - 500
+        // We can check it before to send any events
+        // Or let the message goes and use this check in the projection
+        if ((eventRequest.Number > 0 && newCounter > 500) || (eventRequest.Number < 0 && newCounter < -500))
+            return -1;
 
-    //    eventStream.AppendOne(counterEvent);
+        eventStream.AppendOne(counterEvent);
 
-    //    await documentSession.SaveChangesAsync();
+        await documentSession.SaveChangesAsync();
 
-    //    return counterState.Version;
-    //}
+        return eventStream.CurrentVersion.GetValueOrDefault();
+    }
 
     public static async Task Handle(CounterParalelEventRequest eventRequest, IDocumentStore documentStore, CancellationToken cancelToken)
     {

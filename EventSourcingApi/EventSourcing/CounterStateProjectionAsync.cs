@@ -23,6 +23,11 @@ public sealed class CounterStateProjectionAsync : IProjection
 
         await _textWriter.WriteLineAsync($"Start - CounterStateProjectionAsync | Count: {events.Length}");
 
+        if (Random.Shared.NextDouble() <= 0.05)
+        {
+            throw new RankException("I am just an intermittent exception");
+        }
+
         foreach (IGrouping<Type, IEvent> group in groups)
         {
             await _textWriter.WriteLineAsync($"{group.Key.Name} has {group.Count()} elements");

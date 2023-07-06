@@ -1,10 +1,10 @@
 using EventSourcingApi.Endpoints;
 using EventSourcingApi.EventSourcing;
+using JasperFx.Core;
 using Lamar;
 using Marten;
 using Marten.Events.Daemon.Resiliency;
 using Marten.Events.Projections;
-using Marten.Schema.Identity;
 using Marten.Services.Json;
 using Oakton;
 using Oakton.Resources;
@@ -67,9 +67,12 @@ public static class Program
 
         options.Projections.Add(new CounterStateProjectionAsync(Console.Out), ProjectionLifecycle.Async);
 
+        // Handle with retry the intermittent RankException in the async projection
+        options.Projections.OnException<RankException>().RetryLater(100.Milliseconds(), 250.Milliseconds(), 500.Milliseconds());
+
         // Unlike the Guid, you CAN order by CombGuid - https://martendb.io/documents/identity.html#guid-identifiers
         // In this example there is no meaning for that...
-        options.Schema.For<CounterState>().IdStrategy(new CombGuidIdGeneration());
+        options.Schema.For<CounterState>().IdStrategy(new Marten.Schema.Identity.CombGuidIdGeneration());
     }
 
     private static void configureLamarServices(this ServiceRegistry services)

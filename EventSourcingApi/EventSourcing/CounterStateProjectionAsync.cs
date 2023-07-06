@@ -4,6 +4,11 @@ using Marten.Events.Projections;
 
 namespace EventSourcingApi.EventSourcing;
 
+// This projection retrieves all the events from all streams.
+// This is more suitable when you do not want to group the events by stream and do not require the aggregated state.
+
+// In the 'CustomProjection' base class, you can use AggregateByStream(), which apply EventSlicer by StreamId
+// https://martendb.io/events/projections/custom-aggregates.html
 public sealed class CounterStateProjectionAsync : IProjection
 {
     // This can be any external service like SignalR

@@ -73,7 +73,7 @@ They can be used individually as they serve their own purpose, but they can be i
 
 ##### Resources - Wolwerine
 
-- [Wolverine](https://wolverine.netlify.app) 📓*Offical documentation*
+- [Wolverine](https://wolverine.netlify.app) 📓*Documentation*
   - [Sample projects](https://wolverine.netlify.app/guide/samples.html)
   - [Tesing](https://wolverine.netlify.app/guide/testing.html)
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
@@ -81,7 +81,12 @@ They can be used individually as they serve their own purpose, but they can be i
 
 ##### Resources - Marten
 
-- [MartenDB](https://martendb.io) 📓*Offical documentation*
+- [MartenDB](https://martendb.io) 📓*Documentation*
 - [Marten - Document DB on PostgreSQL](https://youtu.be/lgd_HxGBa-U) 📽️*20m - Raw Coding*
-- [Marten - Event Storage on PostgreSQL](https://youtu.be/z0DLQ6MDH5A) 📽️*22m - Raw Coding*
-- [Practical Event Sourcing with Marten](https://youtu.be/jnDchr5eabI) 📽️*1hour - Oskar Dudycz- NDC Oslo 2023*
+- Event Sourcing
+  - [Marten as an event-store](https://martendb.io/events) 📓*Documentation*
+  - [Wolverine Aggregate Handlers and Event Sourcing](https://wolverine.netlify.app/guide/durability/marten/event-sourcing.html) 📓*Documentation*
+  - The ultimate resources [EventSourcing.NetCore](https://github.com/oskardudycz/EventSourcing.NetCore) 👤*Oskar Dudycz*
+  - [Practical Event Sourcing with Marten](https://youtu.be/jnDchr5eabI) 📽️*1hour - Oskar Dudycz - NDC Oslo 2023*
+  - [Marten - Event Storage on PostgreSQL](https://youtu.be/z0DLQ6MDH5A) 📽️*22m - Raw Coding*
+  - [Keep your streams short](https://www.eventstore.com/blog/keep-your-streams-short-temporal-modelling-for-fast-reads-and-optimal-data-retention) 📓*Oskar Dudycz - EventStore*

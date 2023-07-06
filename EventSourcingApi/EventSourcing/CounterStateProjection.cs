@@ -20,7 +20,7 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         ProjectEvent<CounterDecreased>(applyCounterDecreased);
         ProjectEventAsync<CounterDoNothing>(applyCounterDoNothingAsync);
 
-        //DeleteEventEvent<>
+        //DeleteEvent<>
     }
 
     private static CounterState create(IEvent<CounterStarted> startEvent)
@@ -44,7 +44,7 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
 
     private static async Task<CounterState> applyCounterDoNothingAsync(IQuerySession querySession, CounterState current, CounterDoNothing nothing)
     {
-        // Simulate DB query time with IQuerySession
+        // Simulate DB query for IQuerySession
         await Task.Delay(1_000);
 
         return current;

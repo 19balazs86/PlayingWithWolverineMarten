@@ -2,6 +2,7 @@ using EventSourcingApi.Endpoints;
 using EventSourcingApi.EventSourcing;
 using Lamar;
 using Marten;
+using Marten.Events.Daemon.Resiliency;
 using Marten.Events.Projections;
 using Marten.Schema.Identity;
 using Marten.Services.Json;
@@ -32,7 +33,8 @@ public static class Program
             services
                 .AddMarten(options => configureMarten(options, configuration))
                 .UseLightweightSessions()
-                .IntegrateWithWolverine();
+                .IntegrateWithWolverine()
+                .AddAsyncDaemon(DaemonMode.Solo);
         }
 
         WebApplication app = builder.Build();
@@ -62,6 +64,8 @@ public static class Program
         options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson, enumStorage: EnumStorage.AsString);
 
         options.Projections.Add<CounterStateProjection>(ProjectionLifecycle.Inline);
+
+        options.Projections.Add(new CounterStateProjectionAsync(Console.Out), ProjectionLifecycle.Async);
 
         // Unlike the Guid, you CAN order by CombGuid - https://martendb.io/documents/identity.html#guid-identifiers
         // In this example there is no meaning for that...

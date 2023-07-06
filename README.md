@@ -77,6 +77,7 @@ They can be used individually as they serve their own purpose, but they can be i
   - [Sample projects](https://wolverine.netlify.app/guide/samples.html)
   - [Tesing](https://wolverine.netlify.app/guide/testing.html)
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
+- [Customizing return value behavior](https://jeremydmiller.com/2023/07/05/customizing-return-value-behavior-in-wolverine-for-profit-and-fun) 📓*Jeremy Miller*
 - [Your next messaging library](https://youtu.be/EGwepoGG0CM) 📽️*1h13min - JetBrains - Jeremy Miller*
 
 ##### Resources - Marten
@@ -87,6 +88,8 @@ They can be used individually as they serve their own purpose, but they can be i
   - [Marten as an event-store](https://martendb.io/events) 📓*Documentation*
   - [Wolverine Aggregate Handlers and Event Sourcing](https://wolverine.netlify.app/guide/durability/marten/event-sourcing.html) 📓*Documentation*
   - The ultimate resources [EventSourcing.NetCore](https://github.com/oskardudycz/EventSourcing.NetCore) 👤*Oskar Dudycz*
+  - [Event-driven projections explained](https://event-driven.io/en/projections_in_marten_explained) 📓*Oskar Dudycz*
+    - Incident management example using: SingleStreamProjection, EventProjection, MultiStreamProjection, IAggregateGrouper
   - [Practical Event Sourcing with Marten](https://youtu.be/jnDchr5eabI) 📽️*1hour - Oskar Dudycz - NDC Oslo 2023*
   - [Marten - Event Storage on PostgreSQL](https://youtu.be/z0DLQ6MDH5A) 📽️*22m - Raw Coding*
   - [Keep your streams short](https://www.eventstore.com/blog/keep-your-streams-short-temporal-modelling-for-fast-reads-and-optimal-data-retention) 📓*Oskar Dudycz - EventStore*

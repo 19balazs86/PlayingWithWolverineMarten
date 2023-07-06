@@ -264,7 +264,7 @@
 					"response": []
 				},
 				{
-					"name": "CounterStreamState",
+					"name": "CounterState",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -319,7 +319,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\": \"0189264b-214e-4651-8afb-3966e06f93e1\",\r\n    \"Number\": 100\r\n}",
+							"raw": "{\r\n    \"Ids\": [\"0189264b-214e-4651-8afb-3966e06f93e1\"],\r\n    \"Numbers\": [10, 5, 0, -5, -10]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

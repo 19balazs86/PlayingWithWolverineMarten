@@ -32,27 +32,36 @@ public static class CounterHandler
         return streamAction.Version;
     }
 
-    public static async Task Handle(CounterParalelEventRequest eventRequest, IDocumentStore documentStore)
+    public static async Task Handle(CounterParalelEventRequest eventRequest, IDocumentStore documentStore, CancellationToken cancelToken)
     {
-        int[] numbers = Enumerable.Range(1, 5).Select(_ => Random.Shared.Next(-100, 101)).ToArray();
+        var tasks = new List<Task>();
 
-        // To simulate paralell work for the same event-stream
-        await Parallel.ForEachAsync(numbers, (number, _) => addEvent(documentStore, eventRequest.Id, number));
+        // Simulate multiple event-stream operation
+        foreach (Guid counterId in eventRequest.Ids)
+        {
+            // Simulate operations for the same event-stream
+            Task streamTask = Parallel.ForEachAsync(eventRequest.Numbers, cancelToken, (number, cancel) =>
+                addEvent(documentStore, counterId, number, cancel));
+
+            tasks.Add(streamTask);
+        }
+
+        await Task.WhenAll(tasks);
     }
 
-    private static async ValueTask addEvent(IDocumentStore documentStore, Guid streamId, int number)
+    private static async ValueTask addEvent(IDocumentStore documentStore, Guid streamId, int number, CancellationToken cancellation)
     {
         using IDocumentSession documentSession = documentStore.LightweightSession();
 
         // Place a LOCK on the event-stream!
         // You could pass in events here too, but doing this establishes a transaction
-        await documentSession.Events.AppendExclusive(streamId);
+        await documentSession.Events.AppendExclusive(streamId, cancellation);
 
         object counterEvent = CounterFactory.CreateEvent(number);
 
         documentSession.Events.Append(streamId, counterEvent);
 
         // This will commit changes and release the lock on the event-stream
-        await documentSession.SaveChangesAsync();
+        await documentSession.SaveChangesAsync(cancellation);
     }
 }

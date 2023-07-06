@@ -1,4 +1,5 @@
-﻿using Marten.Events;
+﻿using Marten;
+using Marten.Events;
 using Marten.Events.Aggregation;
 
 namespace EventSourcingApi.EventSourcing;
@@ -10,12 +11,14 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         IncludeType<CounterStarted>();
         IncludeType<CounterIncreased>();
         IncludeType<CounterDecreased>();
+        IncludeType<CounterDoNothing>();
 
         // You can handle events by defining them or by using naming conventions for the method
         CreateEvent<IEvent<CounterStarted>>(create);
 
         ProjectEvent<CounterIncreased>(applyCounterIncreased);
         ProjectEvent<CounterDecreased>(applyCounterDecreased);
+        ProjectEventAsync<CounterDoNothing>(applyCounterDoNothingAsync);
 
         //DeleteEventEvent<>
     }
@@ -37,6 +40,14 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         long counter = current.Counter - decrement.Number;
 
         return current with { Counter = counter };
+    }
+
+    private static async Task<CounterState> applyCounterDoNothingAsync(IQuerySession querySession, CounterState current, CounterDoNothing nothing)
+    {
+        // Simulate DB query time with IQuerySession
+        await Task.Delay(1_000);
+
+        return current;
     }
 
     // By method convention name | Static method does not apply the event, it has to be non static in order to work

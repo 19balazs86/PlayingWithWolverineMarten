@@ -1,0 +1,37 @@
+@baseUrl = http://localhost:5017
+@counterUrl = {{baseUrl}}/Counter
+@counterId = 0189264b-214e-4651-8afb-3966e06f93e1
+
+### Start Counter
+
+POST {{counterUrl}}/Start
+Content-Type: application/json
+
+{
+    "Id": "{{counterId}}",
+    "InitialCount": 10
+}
+
+### Get Counter State
+
+GET {{counterUrl}}/{{counterId}}
+
+### Add an event
+
+PUT {{counterUrl}}/Event
+Content-Type: application/json
+
+{
+    "Id": "{{counterId}}",
+    "Number": 100
+}
+
+### Add multiple events
+
+PUT {{counterUrl}}/Events
+Content-Type: application/json
+
+{
+    "Ids": ["{{counterId}}"],
+    "Numbers": [10, 5, 0, -5, -10]
+}

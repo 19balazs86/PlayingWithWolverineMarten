@@ -6,6 +6,8 @@ public sealed record CounterIncreased(int Number);
 
 public sealed record CounterDecreased(int Number);
 
+public sealed record CounterDoNothing(int Number = 0);
+
 // Version is set automatically by Marten if used as the target of a SingleStreamAggregation
 public sealed record CounterState(Guid Id, long Counter, long Version = 0);
 
@@ -13,11 +15,11 @@ public static class CounterFactory
 {
     public static object CreateEvent(int number)
     {
-        if (number < 0)
+        return number switch
         {
-            return new CounterDecreased(Math.Abs(number));
-        }
-
-        return new CounterIncreased(number);
+            0   => new CounterDoNothing(0),
+            < 0 => new CounterDecreased(Math.Abs(number)),
+            _   => new CounterIncreased(number),
+        };
     }
 }

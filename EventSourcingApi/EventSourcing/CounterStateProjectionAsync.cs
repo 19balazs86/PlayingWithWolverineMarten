@@ -11,7 +11,7 @@ namespace EventSourcingApi.EventSourcing;
 // https://martendb.io/events/projections/custom-aggregates.html
 public sealed class CounterStateProjectionAsync : IProjection
 {
-    // This can be any external service like SignalR
+    // This can be an external service like SignalR
     // https://github.com/oskardudycz/EventSourcing.NetCore/blob/main/Sample/Helpdesk/Helpdesk.Api/Core/SignalR/SignalRProducer.cs
     private readonly TextWriter _textWriter;
 
@@ -35,7 +35,7 @@ public sealed class CounterStateProjectionAsync : IProjection
 
         foreach (IGrouping<Type, IEvent> group in groups)
         {
-            await _textWriter.WriteLineAsync($"{group.Key.Name} has {group.Count()} elements");
+            await _textWriter.WriteLineAsync($"{group.Key.Name} has {group.Count()} events");
 
             await Task.Delay(500);
         }

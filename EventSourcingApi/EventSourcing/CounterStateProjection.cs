@@ -13,7 +13,8 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         IncludeType<CounterDecreased>();
         IncludeType<CounterDoNothing>();
 
-        // You can handle events by defining them or by using naming conventions for the method
+        // You can assign a method to handle a specific event
+        // Or simply go with method naming conventions
         CreateEvent<IEvent<CounterStarted>>(create);
 
         ProjectEvent<CounterIncreased>(applyCounterIncreased);

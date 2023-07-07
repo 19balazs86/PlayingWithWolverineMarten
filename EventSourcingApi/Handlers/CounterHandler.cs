@@ -38,6 +38,7 @@ public static class CounterHandler
         object counterEvent = CounterFactory.CreateEvent(eventRequest.Number);
 
         // Fetch the projected aggregate with built-in optimistic concurrency checks
+        // More examples: https://martendb.io/scenarios/command_handler_workflow.html
         IEventStream<CounterState> eventStream = await documentSession.Events.FetchForWriting<CounterState>(eventRequest.Id);
 
         CounterState counterState = eventStream.Aggregate;

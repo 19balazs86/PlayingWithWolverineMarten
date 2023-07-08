@@ -3,7 +3,7 @@
 
 ### Start registration
 
-GET {{baseUrl}}/registration/{email}
+GET {{baseUrl}}/registration/{{email}}
 
 ### Confirm email
 

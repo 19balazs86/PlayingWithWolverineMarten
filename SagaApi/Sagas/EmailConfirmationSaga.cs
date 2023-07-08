@@ -8,21 +8,23 @@ public sealed class EmailConfirmationSaga : Saga
     public Guid Id { get; set; }
     public string Email { get; set; } = string.Empty;
 
-    public static (EmailConfirmationSaga, EmailConfirmation_Timeout) Start(EmailConfirmation_Start start, ILogger logger)
+    public static (EmailConfirmationSaga, EmailConfirmation_Timeout, Guid) Start(EmailConfirmation_Start start, ILogger logger)
     {
+        Guid sagaId = Guid.NewGuid();
+
         var saga = new EmailConfirmationSaga
         {
-            Id    = Guid.NewGuid(),
+            Id    = sagaId,
             Email = start.Email
         };
 
-        var timeout = new EmailConfirmation_Timeout(saga.Id);
+        var timeout = new EmailConfirmation_Timeout(sagaId);
 
-        logger.LogWarning("http://localhost:5076/confirm/{Id}", saga.Id);
+        logger.LogWarning("http://localhost:5076/confirm/{Id}", sagaId);
 
         // The saga state will be persisted in the DB
         // The timeout message will be cascaded
-        return (saga, timeout);
+        return (saga, timeout, sagaId);
     }
 
     public EmailConfirmed Handle(ConfirmEmailBySagaId confirm, ILogger logger)

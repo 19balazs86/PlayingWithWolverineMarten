@@ -15,9 +15,9 @@ public static class Endpoints
         {
             // Invoke method can not return with the saga state
             // But can return with a cascaded message
-            var timeout = await messageBus.InvokeAsync<EmailConfirmation_Timeout>(start);
+            Guid sagaId = await messageBus.InvokeAsync<Guid>(start);
 
-            return TypedResults.Ok(timeout.Id);
+            return TypedResults.Ok(sagaId);
         }
         catch (DocumentAlreadyExistsException)
         {

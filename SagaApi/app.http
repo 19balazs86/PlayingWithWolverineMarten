@@ -1,0 +1,10 @@
+@baseUrl = http://localhost:5076
+@email   = balazs@domain.com
+
+### Start registration
+
+GET {{baseUrl}}/registration/{email}
+
+### Confirm email
+
+GET {{baseUrl}}/confirm/d0ee8f1e-26f8-4dff-b300-4f9b1cfce37f

@@ -55,6 +55,11 @@ They can be used individually as they serve their own purpose, but they can be i
   - Apply an inline projection
   - Apply an async projection (handle an intermittent exception with retry)
 
+###### SagaApi
+
+- Keeping it simple, and using Web API endpoints to manage Saga state instead of external transports
+- EmailConfirmation process as an example
+
 
 ---
 
@@ -75,8 +80,7 @@ They can be used individually as they serve their own purpose, but they can be i
 ##### Resources - Wolwerine
 
 - [Wolverine](https://wolverine.netlify.app) 📓*Documentation*
-  - [Sample projects](https://wolverine.netlify.app/guide/samples.html)
-  - [Tesing](https://wolverine.netlify.app/guide/testing.html)
+  - [Sample projects](https://wolverine.netlify.app/guide/samples.html) | [Testing](https://wolverine.netlify.app/guide/testing.html) | [Saga](https://wolverine.netlify.app/guide/durability/sagas.html)
 - [Custom error handling middleware for Wolverine.Http](https://jeremydmiller.com/2023/06/28/custom-error-handling-middleware-for-wolverine-http) 📓*Jeremy Miller - Apply middleware on relevant routes, change OpenAPI description*
 - [Customizing return value behavior](https://jeremydmiller.com/2023/07/05/customizing-return-value-behavior-in-wolverine-for-profit-and-fun) 📓*Jeremy Miller*
 - [Your next messaging library](https://youtu.be/EGwepoGG0CM) 📽️*1h13min - JetBrains - Jeremy Miller*

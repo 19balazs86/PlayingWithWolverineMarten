@@ -63,7 +63,8 @@ They can be used individually as they serve their own purpose, but they can be i
 > - Both Wolverine and Marten are more than awesome, I enjoy working with them
 > - They looks easy to use, but they can become somewhat larger animals as you discover the itsy-bitsy details
 > - The documentation is very good and sufficient length to keep you occupied
-> - Unit and Integration tests are like a dream with Alba (also from 'Critter Stack' family)
+> - Unit and Integration tests are like a dream with Alba
+> - Wolverine is not just yet another messaging framework, it also encourages you to think differently while building a system
 
 ---
 

@@ -43,7 +43,7 @@ public sealed class ProductEndpointsTests
         Assert.NotNull(response);
         Assert.NotNull(product);
 
-        Assert.Equal(1, testMessageContext.Sent.Count);
+        Assert.Single(testMessageContext.Sent);
 
         var productCreated = testMessageContext.Sent.ShouldHaveMessageOfType<ProductCreated>();
 

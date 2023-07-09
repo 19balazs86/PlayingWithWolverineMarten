@@ -63,8 +63,8 @@ public static class Program
         options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
 
         options.Projections.Add<CounterStateProjection>(ProjectionLifecycle.Inline);
-
-        options.Projections.Add(new CounterStateProjectionAsync(Console.Out), ProjectionLifecycle.Async);
+        options.Projections.Add(new Custom_Async_Projection(Console.Out), ProjectionLifecycle.Async);
+        options.Projections.Add<UserSummary_MultiStreamProjection>(ProjectionLifecycle.Async);
 
         // Handle with retry the intermittent RankException in the async projection
         options.Projections.OnException<RankException>().RetryLater(100.Milliseconds(), 250.Milliseconds(), 500.Milliseconds());

@@ -8,6 +8,9 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
 {
     public CounterStateProjection()
     {
+        // You an use a base class or an interface type
+        // IncludeType<UserEvent>();
+
         IncludeType<CounterStarted>();
         IncludeType<CounterIncreased>();
         IncludeType<CounterDecreased>();

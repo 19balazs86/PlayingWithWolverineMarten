@@ -52,8 +52,9 @@ They can be used individually as they serve their own purpose, but they can be i
 - Web API with a few endpoints to operate on Events
 - Example #1: Counter - that we can increase / decrease
   - Simulate parallels access to an event-stream and using AppendExclusive to lock the actual stream
-  - Apply an inline projection
-  - Apply an async projection (handle an intermittent exception with retry)
+  - Add an inline projection to update the counter
+  - Add an async IProjection to simulate sending events to an external service (handle intermittent exceptions with retries)
+  - Add a MultiStreamProjection to summarize events for each user
 
 ###### SagaApi
 

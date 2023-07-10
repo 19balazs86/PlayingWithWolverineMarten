@@ -63,6 +63,7 @@ public sealed class ProductEndpointTests : EndpointTestBase
         string location = string.Empty;
 
         // Act
+        // You can use the trackedHttpCall helper method in the base class
         ITrackedSession trackedSession = await _albaHost.ExecuteAndWaitAsync(async () => location = await assumeProductCreated(_createProduct));
 
         // Assert
@@ -104,7 +105,11 @@ public sealed class ProductEndpointTests : EndpointTestBase
 
     private static int getProductIdFromLocation(ReadOnlySpan<char> location)
     {
-        ReadOnlySpan<char> idText = location[(location.LastIndexOf('/') + 1)..];
+        Range range = Range.StartAt(location.LastIndexOf('/') + 1);
+
+        //ReadOnlySpan<char> idText = location[(location.LastIndexOf('/') + 1)..];
+
+        ReadOnlySpan<char> idText = location[range];
 
         return int.Parse(idText);
     }

@@ -14,7 +14,7 @@ public sealed record CounterClosed() : UserEvent(CounterFactory.GetRandomUser())
 
 public static class CounterFactory
 {
-    public static object CreateEvent(int number)
+    public static UserEvent CreateEvent(int number)
     {
         return number switch
         {

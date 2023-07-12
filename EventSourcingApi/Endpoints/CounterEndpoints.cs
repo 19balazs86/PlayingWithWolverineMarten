@@ -27,6 +27,8 @@ public static class CounterEndpoints
     {
         // StreamState? streamState = await querySession.Events.FetchStreamStateAsync(streamId);
 
+        // You can write the raw JSON directly to the HttpResponse stream, without any deserialize/serialize process
+        // https://martendb.io/documents/aspnetcore.html
         return await querySession.LoadAsync<CounterState>(streamId);
     }
 

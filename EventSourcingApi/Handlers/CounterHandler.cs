@@ -36,7 +36,7 @@ public static class CounterHandler
     // Get the aggregation and check it, before to send any events
     public static async Task<long> Handle(CounterEventCheckRequest eventRequest, IDocumentSession documentSession)
     {
-        object counterEvent = CounterFactory.CreateEvent(eventRequest.Number);
+        var counterEvent = CounterFactory.CreateEvent(eventRequest.Number);
 
         // Fetch the projected aggregate with built-in optimistic concurrency checks
         // More examples: https://martendb.io/scenarios/command_handler_workflow.html

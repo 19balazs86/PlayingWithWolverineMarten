@@ -7,3 +7,5 @@ public sealed record CounterEventRequest(Guid Id, int Number);
 public sealed record CounterEventCheckRequest(Guid Id, int Number);
 
 public sealed record CounterParalelEventRequest(Guid[] Ids, int[] Numbers);
+
+public sealed record CounterCloseRequest(Guid CounterStateId);

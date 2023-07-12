@@ -1,6 +1,8 @@
 ﻿using EventSourcingApi.Entities;
 using EventSourcingApi.EventSourcing;
 using Marten;
+using Microsoft.AspNetCore.Http.HttpResults;
+using Wolverine;
 using Wolverine.Http;
 
 namespace EventSourcingApi.Endpoints;
@@ -26,5 +28,20 @@ public static class CounterEndpoints
         // StreamState? streamState = await querySession.Events.FetchStreamStateAsync(streamId);
 
         return await querySession.LoadAsync<CounterState>(streamId);
+    }
+
+    [WolverineDelete("/Counter/Close")]
+    public static async Task<Results<Ok, BadRequest<string>>> DeleteCounterClose(CounterCloseRequest closeRequest, IMessageBus messageBus)
+    {
+        try
+        {
+            await messageBus.InvokeAsync(closeRequest);
+
+            return TypedResults.Ok();
+        }
+        catch (InvalidOperationException ex)
+        {
+            return TypedResults.BadRequest(ex.Message);
+        }
     }
 }

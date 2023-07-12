@@ -24,5 +24,6 @@ public sealed class UserSummary_MultiStreamProjection : MultiStreamProjection<Us
         ProjectEvent<CounterIncreased>(summary => summary.IncreaseEventCount++);
         ProjectEvent<CounterDecreased>(summary => summary.DecreaseEventCount++);
         ProjectEvent<CounterDoNothing>(summary => summary.DoNothingEventCount++);
+        ProjectEvent<CounterClosed>   (summary => summary.CloseEventCount++);
     }
 }

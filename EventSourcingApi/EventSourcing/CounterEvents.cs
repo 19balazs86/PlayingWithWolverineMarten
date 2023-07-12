@@ -10,6 +10,8 @@ public sealed record CounterDecreased(int Number) : UserEvent(CounterFactory.Get
 
 public sealed record CounterDoNothing(int Number = 0) : UserEvent(CounterFactory.GetRandomUser());
 
+public sealed record CounterClosed() : UserEvent(CounterFactory.GetRandomUser());
+
 public static class CounterFactory
 {
     public static object CreateEvent(int number)

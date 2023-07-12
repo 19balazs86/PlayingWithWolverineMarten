@@ -15,6 +15,7 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         IncludeType<CounterIncreased>();
         IncludeType<CounterDecreased>();
         IncludeType<CounterDoNothing>();
+        IncludeType<CounterClosed>();
 
         // You can assign a method to handle a specific event
         // Or simply go with method naming conventions
@@ -23,38 +24,50 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         ProjectEvent<CounterIncreased>(applyCounterIncreased);
         ProjectEvent<CounterDecreased>(applyCounterDecreased);
         ProjectEventAsync<CounterDoNothing>(applyCounterDoNothingAsync);
+        ProjectEvent<CounterClosed>(state => state.IsClosed = true);
 
-        //DeleteEvent<>
+        // This only deletes the CounterState record from the DB, but does not delete the related event records
+        //DeleteEvent<CounterClosed>();
     }
 
     private static CounterState create(IEvent<CounterStarted> startEvent)
     {
-        return new CounterState(startEvent.StreamId, startEvent.Data.InitialCount);
+        Guid ownerUserId = startEvent.Data.IniciatedByUserId;
+
+        var counterState = new CounterState
+        {
+            Id          = startEvent.StreamId,
+            Counter     = startEvent.Data.InitialCount,
+            OwnerUserId = ownerUserId
+        };
+
+        counterState.SentEventByUserIds.Add(ownerUserId);
+
+        return counterState;
     }
 
-    private static CounterState applyCounterIncreased(CounterState current, CounterIncreased increment)
+    private static void applyCounterIncreased(CounterState current, CounterIncreased increment)
     {
-        long counter = current.Counter + increment.Number;
+        current.Counter += increment.Number;
 
-        return current with { Counter = counter };
+        current.SentEventByUserIds.Add(increment.IniciatedByUserId);
     }
 
-    private static CounterState applyCounterDecreased(CounterState current, CounterDecreased decrement)
+    private static void applyCounterDecreased(CounterState current, CounterDecreased decrement)
     {
-        long counter = current.Counter - decrement.Number;
+        current.Counter -= decrement.Number;
 
-        return current with { Counter = counter };
+        current.SentEventByUserIds.Add(decrement.IniciatedByUserId);
     }
 
-    private static async Task<CounterState> applyCounterDoNothingAsync(IQuerySession querySession, CounterState current, CounterDoNothing nothing)
+    private static async Task applyCounterDoNothingAsync(IQuerySession querySession, CounterState current, CounterDoNothing nothing)
     {
         // Simulate DB query for IQuerySession
         await Task.Delay(1_000);
-
-        return current;
     }
 
     // By method convention name | Static method does not apply the event, it has to be non static in order to work
+    // You can use a record type as projectsion state, modify it and return with the new state
     //public CounterState Apply(CounterIncreased increment, CounterState current)
     //{
     //    long counter = current.Counter + increment.Number;

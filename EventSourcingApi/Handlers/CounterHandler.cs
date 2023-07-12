@@ -3,6 +3,7 @@ using EventSourcingApi.EventSourcing;
 using Marten;
 using Marten.Events;
 using Marten.Schema.Identity;
+using Wolverine.Marten;
 
 namespace EventSourcingApi.Handlers;
 
@@ -75,6 +76,40 @@ public static class CounterHandler
         }
 
         await Task.WhenAll(tasks);
+    }
+
+    // https://wolverine.netlify.app/guide/durability/marten/event-sourcing.html
+    // Also check the generated handler
+    [AggregateHandler]
+    public static NotifyUsersCounterClosed Handle(CounterCloseRequest closeRequest, IEventStream<CounterState> counterStream)
+    {
+        var closeEvent = new CounterClosed(); // IniciatedByUserId randomly set here
+
+        CounterState counterState = counterStream.Aggregate;
+
+        if (counterState.OwnerUserId != closeEvent.IniciatedByUserId)
+        {
+            throw new InvalidOperationException("You can not close someone else's counter");
+        }
+
+        if (counterState.IsClosed)
+        {
+            throw new InvalidOperationException("You already closed this counter");
+        }
+
+        // Append the close event
+        counterStream.AppendOne(closeEvent);
+
+        // Return back with a cascaded message
+        return new NotifyUsersCounterClosed(counterState.SentEventByUserIds);
+    }
+
+    public static void Handle(NotifyUsersCounterClosed notify, ILogger logger)
+    {
+        foreach (Guid userId in notify.UserIds)
+        {
+            logger.LogInformation("Sending closed counter notification to user: {UserId}", userId);
+        }
     }
 
     private static async ValueTask appendEvent(IDocumentStore documentStore, Guid streamId, int number, CancellationToken cancellation)

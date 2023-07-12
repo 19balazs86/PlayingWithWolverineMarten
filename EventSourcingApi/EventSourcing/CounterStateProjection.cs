@@ -27,6 +27,8 @@ public sealed class CounterStateProjection : SingleStreamProjection<CounterState
         ProjectEvent<CounterClosed>(state => state.IsClosed = true);
 
         // This only deletes the CounterState record from the DB, but does not delete the related event records
+        // After deleting it, any events that arrive will recreate the state again
+        // Archiving Event-streams: https://martendb.io/events/archiving.html
         //DeleteEvent<CounterClosed>();
     }
 

@@ -83,19 +83,21 @@ public static class CounterHandler
     [AggregateHandler]
     public static NotifyUsersCounterClosed Handle(CounterCloseRequest closeRequest, IEventStream<CounterState> counterStream)
     {
-        var closeEvent = new CounterClosed(); // IniciatedByUserId randomly set here
+        var closeEvent = new CounterClosed();
 
         CounterState counterState = counterStream.Aggregate;
 
         if (counterState.OwnerUserId != closeEvent.IniciatedByUserId)
         {
+            // You can return null and no messages cascaded, but during invocation, you do not know whether it is done or not
             throw new InvalidOperationException("You can not close someone else's counter");
         }
 
-        if (counterState.IsClosed)
-        {
-            throw new InvalidOperationException("You already closed this counter");
-        }
+        // Let the process continue or throw exception...
+        //if (counterState.IsClosed)
+        //{
+        //    throw new InvalidOperationException("You already closed this counter");
+        //}
 
         // Append the close event
         counterStream.AppendOne(closeEvent);

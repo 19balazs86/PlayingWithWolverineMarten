@@ -1,3 +1,3 @@
 ﻿namespace EventSourcingApi.Entities;
 
-public sealed record NotifyUsersCounterClosed(HashSet<Guid> UserIds);
+public sealed record NotifyUsersCounterClosed(IEnumerable<Guid> UserIds);

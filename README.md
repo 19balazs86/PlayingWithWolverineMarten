@@ -76,7 +76,8 @@ They can be used individually as they serve their own purpose, but they can be i
 
 ##### Resources - Wolwerine and Marten
 
-- [Wolverine as Mediator for Amazon SQS, Inbox and Outbox using Marten](https://youtu.be/YlG3bnJ7yCc) 📽*18m -* *Raw Coding* 
+- [Wolverine as Mediator for Amazon SQS, Inbox and Outbox using Marten](https://youtu.be/YlG3bnJ7yCc) 📽*18m -* *Raw Coding*
+- [Dockerfile configuration for Wolwerine/Marten application](https://event-driven.io/en/marten_and_docker) 📓*Oskar Dudycz*
 
 ##### Resources - Wolwerine
 

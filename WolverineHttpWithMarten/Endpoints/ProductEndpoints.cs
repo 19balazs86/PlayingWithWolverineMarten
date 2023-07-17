@@ -13,9 +13,9 @@ public static class ProductEndpoints
     [WolverineGet("/api/Product")]
     public static async Task<PageResult<ProductDto>> GetAll(
         IQuerySession querySession,
-        CancellationToken cancellationToken,
         int? pageNumber,
-        int? pageSize)
+        int? pageSize,
+        CancellationToken cancellationToken)
     {
         var pageQuery = PageQuery<Product, ProductDto>
             .Create(pageNumber, pageSize)

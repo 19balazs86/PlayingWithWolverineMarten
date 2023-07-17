@@ -58,12 +58,7 @@ public class Program
 
             app.UseStatusCodePages(); // Generates the problem details for 400-599 response
 
-            app.MapWolverineEndpoints(options =>
-            {
-                // Right now this Middleware cause an exception in case of IResult response
-                // A local variable or function named 'result' is already defined in this scope
-                options.UseFluentValidationProblemDetailMiddleware();
-            });
+            app.MapWolverineEndpoints(options => options.UseFluentValidationProblemDetailMiddleware());
 
             app.MapFallback(HelloEndpoints.PageNotFound);
         }

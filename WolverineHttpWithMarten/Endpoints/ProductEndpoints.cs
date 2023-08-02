@@ -19,7 +19,7 @@ public static class ProductEndpoints
     {
         var pageQuery = PageQuery<Product, ProductDto>
             .Create(pageNumber, pageSize)
-            //.Filter(p => !p.IsDeleted) // SoftDeleted is enabled
+            //.Filter(p => !p.IsDeleted) // No need this filter, because SoftDeleted is enabled
             .Sort(p => p.Id)
             .Project(Mappers.ProductToDtoProjection);
 
@@ -31,7 +31,7 @@ public static class ProductEndpoints
     [WolverineGet("/api/Product/{id}")]
     public static async Task<ProductDto?> GetById(int id, IQuerySession querySession, CancellationToken cancellationToken)
     {
-        // This could be like: https://martendb.io/documents/querying/compiled-queries.html#querying-for-a-single-document
+        // You can use compiled-queries: https://martendb.io/documents/querying/compiled-queries.html#querying-for-a-single-document
 
         return await querySession
             .Query<Product>()
@@ -90,13 +90,13 @@ public static class ProductEndpoints
     [WolverineDelete("/api/Product/{id}")]
     public static async Task Delete(int id, IDocumentSession documentSession)
     {
-        if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to return with return with JSON.
+        if (Random.Shared.NextDouble() < 0.2) // Note: AddProblemDetails() to return with JSON
             throw new Exception($"Random error during deleting the product({id})");
 
         documentSession.Delete<Product>(id); // SoftDeleted is enabled
         //documentSession.HardDelete<Product>(id);
 
-        // Call it manually, becase there is no [Transactional] / Policies.AutoApplyTransactions middleware included.
+        // Call it manually, becase there is no [Transactional] / Policies.AutoApplyTransactions middleware included
         await documentSession.SaveChangesAsync();
     }
 }

@@ -36,7 +36,7 @@ public sealed class InitialProductData : IInitialData
         await seedProductAsync(store, _productCount, cancellation);
     }
 
-    private async Task seedProductAsync(IDocumentStore documentStore, int count, CancellationToken cancellationToken)
+    private static async Task seedProductAsync(IDocumentStore documentStore, int count, CancellationToken cancellationToken)
     {
         var products = new Faker<Product>()
             //.RuleFor(p => p.Id, _ => id++) // No need. The auto increment works well.

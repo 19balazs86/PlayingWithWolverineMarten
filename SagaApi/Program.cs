@@ -1,6 +1,5 @@
 using Lamar;
 using Marten;
-using Marten.Services.Json;
 using Oakton;
 using Oakton.Resources;
 using SagaApi.Sagas;
@@ -55,7 +54,7 @@ public static class Program
 
         options.Connection(postgreSqlConnString);
 
-        options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
+        options.UseSystemTextJsonForSerialization();
 
         // User can not initiate registration with the same email
         options.Schema.For<EmailConfirmationSaga>().UniqueIndex(x => x.Email);

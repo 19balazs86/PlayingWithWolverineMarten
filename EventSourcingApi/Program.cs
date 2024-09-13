@@ -5,9 +5,10 @@ using Lamar;
 using Marten;
 using Marten.Events.Daemon.Resiliency;
 using Marten.Events.Projections;
-using Marten.Services.Json;
 using Oakton;
 using Oakton.Resources;
+using Polly;
+using Polly.Retry;
 using Wolverine;
 using Wolverine.Http;
 using Wolverine.Marten;
@@ -60,14 +61,14 @@ public static class Program
 
         options.Connection(postgreSqlConnString);
 
-        options.UseDefaultSerialization(serializerType: SerializerType.SystemTextJson);
+        options.UseSystemTextJsonForSerialization();
 
         options.Projections.Add<CounterStateProjection>(ProjectionLifecycle.Inline);
         options.Projections.Add(new Custom_Async_Projection(Console.Out), ProjectionLifecycle.Async);
         options.Projections.Add<UserSummary_MultiStreamProjection>(ProjectionLifecycle.Async);
 
         // Handle with retry the intermittent RankException in the async projection
-        options.Projections.OnException<RankException>().RetryLater(100.Milliseconds(), 250.Milliseconds(), 500.Milliseconds());
+        options.ExtendPolly(pipelineBuilder => pipelineBuilder.AddRetry(_retryStrategyOptions));
 
         // Unlike the Guid, you CAN order by CombGuid - https://martendb.io/documents/identity.html#guid-identifiers
         // In this example there is no meaning for that...
@@ -78,4 +79,12 @@ public static class Program
     {
         services.AddResourceSetupOnStartup();
     }
+
+    private static readonly RetryStrategyOptions _retryStrategyOptions = new RetryStrategyOptions
+    {
+        ShouldHandle     = new PredicateBuilder().Handle<RankException>(),
+        BackoffType      = DelayBackoffType.Exponential,
+        MaxRetryAttempts = 3,
+        Delay            = 150.Milliseconds(),
+    };
 }

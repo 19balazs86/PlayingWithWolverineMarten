@@ -1,7 +1,6 @@
 using EventSourcingApi.Endpoints;
 using EventSourcingApi.EventSourcing;
 using JasperFx.Core;
-using Lamar;
 using Marten;
 using Marten.Events.Daemon.Resiliency;
 using Marten.Events.Projections;
@@ -49,9 +48,9 @@ public static class Program
         return await app.RunOaktonCommands(args);
     }
 
-    private static void configureWolverine(HostBuilderContext context, WolverineOptions options)
+    private static void configureWolverine(WolverineOptions options)
     {
-        options.Services.configureLamarServices();
+        options.Services.AddResourceSetupOnStartup();
     }
 
     private static void configureMarten(StoreOptions options, IConfiguration configuration)
@@ -73,11 +72,6 @@ public static class Program
         // Unlike the Guid, you CAN order by CombGuid - https://martendb.io/documents/identity.html#guid-identifiers
         // In this example there is no meaning for that...
         options.Schema.For<CounterState>().IdStrategy(new Marten.Schema.Identity.CombGuidIdGeneration());
-    }
-
-    private static void configureLamarServices(this ServiceRegistry services)
-    {
-        services.AddResourceSetupOnStartup();
     }
 
     private static readonly RetryStrategyOptions _retryStrategyOptions = new RetryStrategyOptions

@@ -1,4 +1,3 @@
-using Lamar;
 using Marten;
 using Oakton;
 using Oakton.Resources;
@@ -42,9 +41,9 @@ public static class Program
         return await app.RunOaktonCommands(args);
     }
 
-    private static void configureWolverine(HostBuilderContext context, WolverineOptions options)
+    private static void configureWolverine(WolverineOptions options)
     {
-        options.Services.configureLamarServices();
+        options.Services.AddResourceSetupOnStartup();
     }
 
     private static void configureMarten(StoreOptions options, IConfiguration configuration)
@@ -58,11 +57,6 @@ public static class Program
 
         // User can not initiate registration with the same email
         options.Schema.For<EmailConfirmationSaga>().UniqueIndex(x => x.Email);
-    }
-
-    private static void configureLamarServices(this ServiceRegistry services)
-    {
-        services.AddResourceSetupOnStartup();
     }
 
     private static void writeConsoleLog(ILogger logger)

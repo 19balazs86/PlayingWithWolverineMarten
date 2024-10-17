@@ -1,4 +1,3 @@
-using Lamar;
 using Marten;
 using Oakton;
 using Oakton.Resources;
@@ -65,7 +64,7 @@ public class Program
         return await app.RunOaktonCommands(args);
     }
 
-    private static void configureWolverine(HostBuilderContext context, WolverineOptions options)
+    private static void configureWolverine(WolverineOptions options)
     {
         // https://wolverine.netlify.app/guide/durability/marten/#transactional-middleware
         // This middleware will apply to the HTTP endpoints as well
@@ -82,7 +81,7 @@ public class Program
 
         // options.CodeGeneration.TypeLoadMode = TypeLoadMode.Static; // https://wolverine.netlify.app/guide/codegen.html#optimized-workflow
 
-        configureLamarServices(options.Services);
+        options.Services.AddResourceSetupOnStartup();
     }
 
     private static void configureMarten(StoreOptions options, IConfiguration configuration)
@@ -99,10 +98,5 @@ public class Program
         options.UseSystemTextJsonForSerialization(enumStorage: EnumStorage.AsString);
 
         // options.RegisterDocumentType<Product>(); // This is optional. The first time you add the document, it automatically creates the table.
-    }
-
-    private static void configureLamarServices(ServiceRegistry services)
-    {
-        services.AddResourceSetupOnStartup();
     }
 }

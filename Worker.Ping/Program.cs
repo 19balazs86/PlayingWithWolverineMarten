@@ -1,5 +1,4 @@
 using JasperFx.Core;
-using Lamar;
 using Oakton;
 using Oakton.Resources;
 using Shared;
@@ -24,7 +23,7 @@ public static class Program
         return await hostBuilder.RunOaktonCommands(args);
     }
 
-    private static void configureWolverine(HostBuilderContext context, WolverineOptions options)
+    private static void configureWolverine(WolverineOptions options)
     {
         options.ServiceName = _serviceName;
 
@@ -48,10 +47,8 @@ public static class Program
         options.Services.configureLamarServices();
     }
 
-    private static void configureLamarServices(this ServiceRegistry services)
+    private static void configureLamarServices(this IServiceCollection services)
     {
-        // TODO: Uncomment a worker to test
-
         services.AddHostedService<Workers.LocalPingWorker>();
         //services.AddHostedService<Workers.PingWorker>();
         //services.AddHostedService<Workers.RequestWorker>();

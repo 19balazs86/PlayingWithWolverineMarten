@@ -4,26 +4,23 @@ using Wolverine;
 
 namespace Worker.Ping.Workers;
 
-public sealed class PingWorker : BackgroundService
+public sealed class PingWorker(IServiceScopeFactory _serviceScopeFactory) : BackgroundService
 {
-    private readonly IMessageBus _messageBus;
-
     private int _counter = 1;
-
-    public PingWorker(IMessageBus messageBus)
-    {
-        _messageBus = messageBus;
-    }
 
     protected override async Task ExecuteAsync(CancellationToken stoppingToken)
     {
         while (!stoppingToken.IsCancellationRequested)
         {
+            await Task.Delay(500.Milliseconds());
+
             var ping = new PingMessage(_counter++);
 
-            await _messageBus.SendAsync(ping);
+            await using AsyncServiceScope scope = _serviceScopeFactory.CreateAsyncScope();
 
-            await Task.Delay(500.Milliseconds());
+            var messageBus = scope.ServiceProvider.GetRequiredService<IMessageBus>();
+
+            await messageBus.SendAsync(ping);
         }
     }
 }

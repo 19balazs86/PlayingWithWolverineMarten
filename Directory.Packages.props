@@ -7,11 +7,11 @@
     <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.0.0" />
     <PackageVersion Include="Bogus" Version="35.6.1" />
 
-    <PackageVersion Include="WolverineFx" Version="3.2.0" />
-    <PackageVersion Include="WolverineFx.RabbitMQ" Version="3.2.0" />
-    <PackageVersion Include="WolverineFx.Http" Version="3.2.0" />
-    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="3.2.0" />
-    <PackageVersion Include="WolverineFx.Marten" Version="3.2.0" />
+    <PackageVersion Include="WolverineFx" Version="3.3.0" />
+    <PackageVersion Include="WolverineFx.RabbitMQ" Version="3.3.0" />
+    <PackageVersion Include="WolverineFx.Http" Version="3.3.0" />
+    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="3.3.0" />
+    <PackageVersion Include="WolverineFx.Marten" Version="3.3.0" />
 
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
     <PackageVersion Include="xunit" Version="2.9.2" />

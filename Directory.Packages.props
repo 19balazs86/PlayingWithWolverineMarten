@@ -4,20 +4,20 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.0" />
-    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.1.0" />
+    <PackageVersion Include="Swashbuckle.AspNetCore" Version="7.2.0" />
     <PackageVersion Include="Bogus" Version="35.6.1" />
 
-    <PackageVersion Include="WolverineFx" Version="3.4.0" />
-    <PackageVersion Include="WolverineFx.RabbitMQ" Version="3.4.0" />
-    <PackageVersion Include="WolverineFx.Http" Version="3.4.0" />
-    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="3.4.0" />
-    <PackageVersion Include="WolverineFx.Marten" Version="3.4.0" />
+    <PackageVersion Include="WolverineFx" Version="3.5.1" />
+    <PackageVersion Include="WolverineFx.RabbitMQ" Version="3.5.1" />
+    <PackageVersion Include="WolverineFx.Http" Version="3.5.1" />
+    <PackageVersion Include="WolverineFx.Http.FluentValidation" Version="3.5.1" />
+    <PackageVersion Include="WolverineFx.Marten" Version="3.5.1" />
 
     <PackageVersion Include="Microsoft.NET.Test.Sdk" Version="17.12.0" />
     <PackageVersion Include="xunit" Version="2.9.2" />
-    <PackageVersion Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.0" />
     <PackageVersion Include="Moq" Version="4.20.72" />
     <PackageVersion Include="Alba" Version="8.1.0" />
-    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.0.0" />
+    <PackageVersion Include="Testcontainers.PostgreSql" Version="4.1.0" />
   </ItemGroup>
 </Project>
